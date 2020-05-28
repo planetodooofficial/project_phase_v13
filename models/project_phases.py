@@ -20,5 +20,53 @@ class ProjectPhases(models.Model):
     company_id = fields.Many2one('res.company', string='Company', required=True,
                                  default=_default_company_id)
     sequence = fields.Integer("Sequence")
-    phase_name = fields.One2many("Phase Name")
+    # phase_name = fields.One2many("Phase Name")
     deadline = fields.Date("Deadline of The phase")
+    method_name = fields.Selection([
+        ("waterfall", "Waterfall Model"),
+        ("agile", "Agile Model"),
+        ("scrum", "Scrum"),
+        ("kanban", "Kanban"),
+        ("prince", "PRINCE2")
+    ], string="Select the Project Methodology")
+    waterfall_method = fields.Selection([
+        ("requirement", "Requirement Gathering"),
+        ("analysis", "Analysis"),
+        ("design", "Design"),
+        ("develop", "Development"),
+        ("test", "Testing"),
+        ("deploy", "Deployment & maintenance")
+    ], default="requirement")
+    agile_method = fields.Selection([
+        ("requirement", "Requirement Gathering"),
+        ("develop", "Development"),
+        ("test", "Testing"),
+        ("delivery", "Delivery"),
+        ("feedback", "Feedback")
+    ], default="requirement")  # add a condition of whether you want to go back to requirements or end
+    scrum_method = fields.Selection(
+        [
+            ("requirement", "Requirement Gathering"),
+            ("backlog", "Update Product backlog"),
+            ("develop", "Development"),
+            ("sprint review", "Sprint Review"),
+            ("delivery", "Delivery"),
+            ("feedback", "Sprint Retrospective(Feedback)")
+        ], default="requirement")
+    prince_method = fields.Selection([
+        ("start", "Starting up"),
+        ("directing", "Directing"),
+        ("initiate", "Initiating"),
+        ("control", "Controlling a stage"),
+        ("delivery", "Managing product delivery"),
+        ("stage", "Managing stage boundaries"),
+        ("close", "Closing")
+    ], default="start")
+    kanban_method = fields.Selection([
+        ("new", "New"),
+        ("todo", "To Do"),
+        ("progress", "In progress"),
+        ("test", "Testing"),
+        ("done", "Done")
+    ], default="new")
+    sprint_cycle = fields.Integer("Sprint Cycle Number")

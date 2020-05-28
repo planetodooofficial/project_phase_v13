@@ -10,11 +10,64 @@
                         <group>
                             <field name="project_id"/>
                             <field name="user_id"/>
+                            <field name="method_name"/>
+                        </group>
+                        <group>
                             <field name="start_date"/>
                             <field name="end_date"/>
                             <field name="company_id"/>
                             <field name="deadline"/>
                         </group>
+                        <notebook attrs="{'invisible':[('method_name','=',False)]}">
+                            <page string="SCRUM" attrs="{'invisible': [('method_name', '!=', 'scrum')]}">
+                                <form>
+                                    <header>
+                                        <field name="scrum_method" widget="statusbar"/>
+                                    </header>
+                                    <group>
+
+                                    </group>
+                                </form>
+                            </page>
+                            <page string="Waterfall" attrs="{'invisible': [('method_name', '!=', 'waterfall')]}">
+                                <form>
+                                    <header>
+                                        <field name="waterfall_method" widget="statusbar"/>
+                                    </header>
+                                    <group>
+                                    </group>
+                                </form>
+                            </page>
+                            <page string="Agile" attrs="{'invisible': [('method_name', '!=', 'agile')]}">
+                                <form>
+                                    <header>
+                                        <field name="agile_method" widget="statusbar"/>
+                                    </header>
+                                    <group>
+                                    </group>
+                                </form>
+                            </page>
+                            <page string="PRINCE2" attrs="{'invisible': [('method_name', '!=', 'prince')]}">
+                                <form>
+                                    <header>
+                                        <field name="prince_method" widget="statusbar"/>
+                                    </header>
+                                    <group>
+
+                                    </group>
+                                </form>
+                            </page>
+                            <page string="Kanban" attrs="{'invisible': [('method_name', '!=', 'kanban')]}">
+                                <form>
+                                    <header>
+                                        <field name="kanban_method" widget="statusbar"/>
+                                    </header>
+                                    <group>
+
+                                    </group>
+                                </form>
+                            </page>
+                        </notebook>
                     </sheet>
                 </form>
             </field>
@@ -33,17 +86,7 @@
                 </tree>
             </field>
         </record>
-        <record id="project_phase_task" model="ir.ui.view">
-            <field name="name">project.phase.task</field>
-            <field name="model">project.task</field>
-            <field name="inherit_id" ref="project.view_task_form2" />
-            <field name="arch" type="xml">
-                <field name="user_id" position="after">
-                    <field name=""
-                </field>
-            </field>
 
-        </record>
         <record id="action_project_phases" model="ir.actions.act_window">
             <field name="name">Project Phases</field>
             <field name="res_model">project.phases</field>
@@ -52,7 +95,6 @@
             <field name="context">{}</field>
             <field name="target">main</field>
         </record>
-
         <menuitem id="project_phases_menu" name="Project Phases" parent="project.menu_main_pm" action="action_project_phases" sequence="10"/>
     </data>
 </odoo>
