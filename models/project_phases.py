@@ -3,6 +3,7 @@ from odoo import api, fields, models, _
 
 class ProjectPhases(models.Model):
     _name = "project.phases"
+    _inherit = "project.task"
 
     @api.model
     def _default_company_id(self):
