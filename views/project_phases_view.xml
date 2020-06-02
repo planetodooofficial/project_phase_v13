@@ -22,7 +22,7 @@
                             <page string="SCRUM" attrs="{'invisible': [('method_name', '!=', 'scrum')]}">
                                 <form>
                                     <header>
-                                        <field name="scrum_method" widget="statusbar"/>
+                                        <field name="scrum_method" options="{'clickable': '1'}" widget="statusbar" />
                                     </header>
                                     <group>
 
@@ -32,7 +32,7 @@
                             <page string="Waterfall" attrs="{'invisible': [('method_name', '!=', 'waterfall')]}">
                                 <form>
                                     <header>
-                                        <field name="waterfall_method" widget="statusbar"/>
+                                        <field name="waterfall_method" widget="statusbar" options="{'clickable': '1'}"/>
                                     </header>
                                     <group>
 
@@ -42,7 +42,7 @@
                             <page string="Agile" attrs="{'invisible': [('method_name', '!=', 'agile')]}">
                                 <form>
                                     <header>
-                                        <field name="agile_method" widget="statusbar"/>
+                                        <field name="agile_method" widget="statusbar" options="{'clickable': '1'}"/>
                                     </header>
                                     <group>
                                     </group>
@@ -51,7 +51,7 @@
                             <page string="PRINCE2" attrs="{'invisible': [('method_name', '!=', 'prince')]}">
                                 <form>
                                     <header>
-                                        <field name="prince_method" widget="statusbar"/>
+                                        <field name="prince_method" widget="statusbar" options="{'clickable': '1'}"/>
                                     </header>
                                     <group>
 
@@ -61,7 +61,7 @@
                             <page string="Kanban" attrs="{'invisible': [('method_name', '!=', 'kanban')]}">
                                 <form>
                                     <header>
-                                        <field name="kanban_method" widget="statusbar"/>
+                                        <field name="kanban_method" options="{'clickable': '1'}" widget="statusbar"/>
                                     </header>
                                     <group>
 
@@ -84,6 +84,8 @@
                     <field name="end_date"/>
                     <field name="company_id"/>
                     <field name="deadline"/>
+                    <field name="method_name"/>
+                    <field name="phases" string="Project Phase"/>
                 </tree>
             </field>
         </record>
@@ -91,33 +93,45 @@
             <field name="name">project.phases.kanban</field>
             <field name="model">project.phases</field>
             <field name="arch" type="xml">
-                <kanban class="o_kanban_mobile">
+                <kanban class="oe_background_grey o_kanban_dashboard o_project_kanban o_emphasize_colors">
+                    <field name="task_count"/>
                     <templates>
                         <t t-name="kanban-box">
                             <div t-attf-class="oe_kanban_content oe_kanban_global_click o_kanban_get_form">
                                 <div class="row">
                                     <div class="col-12">
-                                        <strong><field name="method_name" string="Project Methodology"/></strong>
+                                        <strong><span>Project Phase: </span></strong>
+                                        <strong><field name="waterfall_method" string="Project Phase" attrs="{'invisible': [('method_name', '!=', 'waterfall')]}" /></strong>
+                                        <strong><field name="agile_method" string="Project Phase"
+                                                       attrs="{'invisible': [('method_name', '!=', 'agile')]}"/></strong>
+                                        <strong><field name="prince_method" string="Project Phase"
+                                                       attrs="{'invisible': [('method_name', '!=', 'prince')]}"/></strong>
+                                        <strong><field name="scrum_method" string="Project Phase"
+                                                       attrs="{'invisible': [('method_name', '!=', 'scrum')]}"/></strong>
+                                        <strong><field name="kanban_method" string="Project Phase"
+                                                       attrs="{'invisible': [('method_name', '!=', 'kanban')]}"/></strong>
                                     </div>
                                     <div class="col-12">
+                                        <strong><span>Project Methodology: </span></strong>
+                                        <field name="method_name" string="Project Methodology"/>
+                                    </div>
+                                    <div class="col-12">
+                                        <span>Project Name: </span>
                                         <field name="project_id" string="Project name"/>
                                     </div>
+                                </div>
+                                <div class="o_project_kanban_boxes">
+                                    <a class="o_project_kanban_box" name="%(project.act_project_project_2_project_task_all)d" type="action">
+                                        <div>
+                                            <span class="o_value"><t t-esc="record.task_count.value"/></span>
+                                            <span class="o_label">Tasks</span>
+                                        </div>
+                                    </a>
                                 </div>
                             </div>
                         </t>
                     </templates>
                 </kanban>
-            </field>
-        </record>
-        <record id="project_phases_inherit" model="ir.ui.view">
-            <field name="name">project.phase.inherit</field>
-            <field name="model">project.task</field>
-            <field name="inherit_id" ref="project.view_task_form2"/>
-            <field name="priority">10</field>
-            <field name="arch" type="xml">
-                <xpath expr="//field[@name='name']" position="after">
-                    <field name="agile_method"/>
-                </xpath>
             </field>
         </record>
 

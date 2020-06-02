@@ -10,6 +10,7 @@
     'data': [
              'security/ir.model.access.csv',
              'views/project_phases_view.xml',
+             # 'views/project_phases_task.xml',
          ],
     'demo': [],
     'installable': True,
