@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+        <record id="project_phases_kanban_dashboard" model="ir.ui.view">
+            <field name="name">project.phases.kanban.dashboard</field>
+            <field name="model">project.dashboard</field>
+            <field name="arch" type="xml">
+                <kanban class="oe_background_grey o_kanban_dashboard o_project_kanban o_emphasize_colors" create="0">
+                    <templates>
+                        <t t-name="kanban-box">
+                            <div class="row">
+                                <div class ="col-xs-4 o_kanban_card_manage_section o_kanban_manage_view">
+<!--                                    <a type="object">-->
+<!--                                        <img src="custom/project_phase_v13/project_phases_v13/static/src/img/agile.jpg"/>-->
+<!--                                    </a>-->
+                                </div>
+                                <div class ="col-xs-4 o_kanban_card_manage_section o_kanban_manage_view">
+                                    <a type="object">
+                                        <img src="custom/project_phase_v13/project_phases_v13/static/src/img/kanban.jpg"/>
+                                    </a>
+                                </div>
+                                <div class ="col-xs-4 o_kanban_card_manage_section o_kanban_manage_view">
+                                    <a type="object">
+                                        <img src="custom/project_phase_v13/project_phases_v13/static/src/img/scrum.jpg"/>
+                                    </a>
+                                </div>
+                                <div class ="col-xs-4 o_kanban_card_manage_section o_kanban_manage_view">
+                                    <a type="object">
+                                        <img src="custom/project_phase_v13/project_phases_v13/static/src/img/waterfall.jpg"/>
+                                    </a>
+                                </div>
+                                <div class ="col-xs-4 o_kanban_card_manage_section o_kanban_manage_view">
+                                    <a type="object">
+                                        <img src="custom/project_phase_v13/project_phases_v13/static/src/img/prince2.png"/>
+                                    </a>
+                                </div>
+                                <div class ="col-xs-4 o_kanban_card_manage_section o_kanban_manage_view">
+                                    <a type="object">
+                                        <img src="custom/project_phase_v13/project_phases_v13/static/src/img/blank.jpg"/>
+                                    </a>
+                                </div>
+                            </div>
+                        </t>
+                    </templates>
+                </kanban>
+            </field>
+        </record>
+        <record id="action_project_dashboard" model="ir.actions.act_window">
+            <field name="name">Project Dashboard</field>
+            <field name="res_model">project.dashboard</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="view_mode">kanban</field>
+        </record>
+        <menuitem id="project_dashboard_menu" name="Project Dashboard" parent="project.menu_main_pm" action="action_project_dashboard" sequence="11"/>
+    </data>
+</odoo>
