@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+        <record id="project_inherit_phase_form" model="ir.ui.view">
+            <field name="name">project.inherit.phase.form</field>
+            <field name="model">project.project</field>
+            <field name = "inherit_id" ref="project.project_project_view_form_simplified"/>
+            <field name="arch" type="xml">
+                <xpath expr="//group" position="after">
+                    <group>
+                        <field name="project_description" string="Description" style="height:100px"/>
+                    </group>
+                    <group>
+                        <field name="invite_user" string="Invite User"/>
+                        <field name="project_start_date" string="Project Start Date"/>
+                        <field name="project_end_date" string="Project End Date"/>
+                        <field name="notification_date" string="Set Remainder for End date"/>
+                        <field name="project_budget" string="Project Budget"/>
+                    </group>
+                </xpath>
+            </field>
+        </record>
+        <record id="project_inherit_phase_view" model="ir.ui.view">
+            <field name="name">project.inherit.phase.view</field>
+            <field name="model">project.project</field>
+            <field name = "inherit_id" ref="project.edit_project"/>
+            <field name="arch" type="xml">
+                <xpath expr="//group" position="after">
+                    <group string="Project Details">
+                        <field name="project_description" string="Description" style="height:100px"/>
+                        <field name="invite_user" string="Invite User"/>
+                        <field name="project_start_date" string="Project Start Date"/>
+                        <field name="project_end_date" string="Project End Date"/>
+                        <field name="notification_date" string="Set Remainder for End date"/>
+                        <field name="project_budget" string="Project Budget"/>
+                    </group>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

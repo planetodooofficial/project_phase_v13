@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data noupdate="0">
+        <record model="project.dashboard" id="project_waterfall">
+            <field name="name">Waterfall Model</field>
+            <field name="method_name">waterfall</field>
+        </record>
+       <record model="project.dashboard" id="project_agile">
+            <field name="name">Agile Model</field>
+            <field name="method_name">agile</field>
+        </record>
+       <record model="project.dashboard" id="project_scrum">
+            <field name="name">Scrum</field>
+            <field name="method_name">scrum</field>
+        </record>
+       <record model="project.dashboard" id="project_kanban">
+            <field name="name">Kanban</field>
+            <field name="method_name">kanban</field>
+        </record>
+       <record model="project.dashboard" id="project_prince">
+            <field name="name">PRINCE2</field>
+            <field name="method_name">prince</field>
+        </record>
+       <record model="project.dashboard" id="project_blank">
+            <field name="name">Blank</field>
+            <field name="method_name">blank</field>
+        </record>
+    </data>
+</odoo>

@@ -1,43 +1,29 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <odoo>
     <data>
-        <record id="project_phases_kanban_dashboard" model="ir.ui.view">
-            <field name="name">project.phases.kanban.dashboard</field>
+        <record id="project_dashboard_kanban_view" model="ir.ui.view">
+            <field name="name">project.dashboard.kanban</field>
             <field name="model">project.dashboard</field>
             <field name="arch" type="xml">
-                <kanban class="oe_background_grey o_kanban_dashboard o_project_kanban o_emphasize_colors" create="0">
+                <kanban class="oe_background_grey o_kanban_dashboard o_gst_kanban" create="0">
+                    <field name="method_name"/>
                     <templates>
                         <t t-name="kanban-box">
-                            <div class="row">
-                                <div class ="col-xs-4 o_kanban_card_manage_section o_kanban_manage_view">
-<!--                                    <a type="object">-->
-<!--                                        <img src="custom/project_phase_v13/project_phases_v13/static/src/img/agile.jpg"/>-->
-<!--                                    </a>-->
-                                </div>
-                                <div class ="col-xs-4 o_kanban_card_manage_section o_kanban_manage_view">
-                                    <a type="object">
-                                        <img src="custom/project_phase_v13/project_phases_v13/static/src/img/kanban.jpg"/>
-                                    </a>
-                                </div>
-                                <div class ="col-xs-4 o_kanban_card_manage_section o_kanban_manage_view">
-                                    <a type="object">
-                                        <img src="custom/project_phase_v13/project_phases_v13/static/src/img/scrum.jpg"/>
-                                    </a>
-                                </div>
-                                <div class ="col-xs-4 o_kanban_card_manage_section o_kanban_manage_view">
-                                    <a type="object">
-                                        <img src="custom/project_phase_v13/project_phases_v13/static/src/img/waterfall.jpg"/>
-                                    </a>
-                                </div>
-                                <div class ="col-xs-4 o_kanban_card_manage_section o_kanban_manage_view">
-                                    <a type="object">
-                                        <img src="custom/project_phase_v13/project_phases_v13/static/src/img/prince2.png"/>
-                                    </a>
-                                </div>
-                                <div class ="col-xs-4 o_kanban_card_manage_section o_kanban_manage_view">
-                                    <a type="object">
-                                        <img src="custom/project_phase_v13/project_phases_v13/static/src/img/blank.jpg"/>
-                                    </a>
+                            <div class="o_kanban_card_header" >
+                                <div class="o_kanban_card_header_title">
+                                    <div class="o_primary">
+                                        <center><div><field name="method_name" attrs="{'invisible': [('method_name', '!=', 'kanban'),('method_name', '!=', 'prince'),('method_name', '!=', 'blank')]}" /></div></center>
+                                        <a name="%(project.open_create_project)d" type="action">
+                                            <center>
+                                                <img width="100%" height="100%" src="/project_phases_v13/static/src/img/agile.jpg" attrs="{'invisible': [('method_name', '!=', 'agile')]}"/>
+                                                <img width="100%" height="100%" src="/project_phases_v13/static/src/img/waterfall.jpg" attrs="{'invisible': [('method_name', '!=', 'waterfall')]}"/>
+                                                <img width="100%" height="100%" src="/project_phases_v13/static/src/img/prince2.png" attrs="{'invisible': [('method_name', '!=', 'prince')]}"/>
+                                                <img width="100%" height="100%" src="/project_phases_v13/static/src/img/kanban.png" attrs="{'invisible': [('method_name', '!=', 'kanban')]}"/>
+                                                <img width="100%" height="100%" src="/project_phases_v13/static/src/img/scrum.jpg" attrs="{'invisible': [('method_name', '!=', 'scrum')]}"/>
+                                                <img width="100%" height="100%" src="/project_phases_v13/static/src/img/blank.jpg" attrs="{'invisible': [('method_name', '!=', 'blank')]}"/>
+                                            </center>
+                                        </a>
+                                    </div>
                                 </div>
                             </div>
                         </t>
