@@ -15,7 +15,16 @@
                         <field name="project_start_date" string="Project Start Date"/>
                         <field name="project_end_date" string="Project End Date"/>
                         <field name="notification_date" string="Set Remainder for End date"/>
+                        <field name="methodology" string="Methodology" invisible="1"/>
+                    </group>
+
+                    <group string="Budget">
                         <field name="project_budget" string="Project Budget"/>
+                        <field name="fixed_budget" attrs="{'invisible': [('project_budget', '!=', 'fixed')]}"/>
+                        <field name="weekly_budget" attrs="{'invisible': [('project_budget', '!=', 'weekly')]}"/>
+                        <field name="custom_price" attrs="{'invisible': [('project_budget', '!=', 'custom')]}"/>
+                        <field name="custom_hours" attrs="{'invisible': [('project_budget', '!=', 'custom')]}"/>
+                        <field name="custom_minutes" attrs="{'invisible': [('project_budget', '!=', 'custom')]}"/>
                     </group>
                 </xpath>
             </field>
@@ -32,7 +41,15 @@
                         <field name="project_start_date" string="Project Start Date"/>
                         <field name="project_end_date" string="Project End Date"/>
                         <field name="notification_date" string="Set Remainder for End date"/>
+                        <field name="methodology" string="Methodology"/>
+                    </group>
+                    <group string="Budget">
                         <field name="project_budget" string="Project Budget"/>
+                        <field name="fixed_budget" attrs="{'invisible': [('project_budget', '!=', 'fixed')]}"/>
+                        <field name="weekly_budget" attrs="{'invisible': [('project_budget', '!=', 'weekly')]}"/>
+                        <field name="custom_price" attrs="{'invisible': [('project_budget', '!=', 'custom')]}"/>
+                        <field name="custom_hours" attrs="{'invisible': [('project_budget', '!=', 'custom')]}"/>
+                        <field name="custom_minutes" attrs="{'invisible': [('project_budget', '!=', 'custom')]}"/>
                     </group>
                 </xpath>
             </field>

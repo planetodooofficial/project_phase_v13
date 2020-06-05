@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+        <record model="ir.ui.view" id="project_stages_form_inherit">
+            <field name="name">project.stages.form.inherit</field>
+            <field name="model">project.task.type</field>
+            <field name = "inherit_id" ref="project.task_type_edit"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='sequence']" position="after">
+                    <field name="method_name"/>
+                </xpath>
+            </field>
+        </record>
+        <record model="ir.ui.view" id="project_stages_tree_inherit">
+            <field name="name">project.stages.tree.inherit</field>
+            <field name="model">project.task.type</field>
+            <field name = "inherit_id" ref="project.task_type_tree"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='description']" position="after">
+                    <field name="method_name"/>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

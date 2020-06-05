@@ -23,6 +23,10 @@ class ProjectDashboard(models.Model):
         ("deploy", "Deployment & maintenance")
     ], default="requirement")
 
-    def method_action(self):
-        project_obj = self.env["project.task.type"].create({'name': "Requirement Gathering"})
-        return
+    agile_method = fields.Selection([
+        ("requirement", "Requirement Gathering"),
+        ("develop", "Development"),
+        ("test", "Testing"),
+        ("delivery", "Delivery"),
+        ("feedback", "Feedback")
+    ], default="requirement")
