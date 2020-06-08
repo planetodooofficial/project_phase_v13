@@ -1,4 +1,4 @@
-from odoo import models, api, _, fields
+from odoo import models, fields
 
 
 class ProjectDashboard(models.Model):

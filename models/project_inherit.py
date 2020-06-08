@@ -4,11 +4,12 @@ from odoo import models, api, _, fields
 class ProjectInherit(models.Model):
     _inherit = "project.project"
 
+    partner_id = fields.Many2one('res.partner', string='Client', auto_join=True, tracking=True, domain="['|', ('company_id', '=', False), ('company_id', '=', company_id)]")
     project_description = fields.Char("Description")
     invite_user = fields.Char("Invite User")
     project_start_date = fields.Date("Project Start Date")
     project_end_date = fields.Date("Project End Date")
-    notification_date = fields.Date("Set Remainder for End date")
+    notification_date = fields.Date("Notification Date")
     project_budget = fields.Selection([("fixed", "Fixed Budget"),
                                        ("weekly", "Weekly Budget"),
                                        ("custom", "Custom Budget")])

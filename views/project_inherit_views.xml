@@ -40,7 +40,7 @@
                         <field name="invite_user" string="Invite User"/>
                         <field name="project_start_date" string="Project Start Date"/>
                         <field name="project_end_date" string="Project End Date"/>
-                        <field name="notification_date" string="Set Remainder for End date"/>
+                        <field name="notification_date" string="Notification Date"/>
                         <field name="methodology" string="Methodology"/>
                     </group>
                     <group string="Budget">
