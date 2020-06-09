@@ -8,51 +8,68 @@
             <field name="arch" type="xml">
                 <xpath expr="//group" position="after">
                     <group>
-                        <field name="project_description" string="Description" style="height:100px"/>
+                        <group>
+                            <field name = "company_id" invisible="1"/>
+                            <field name = "partner_id" style="width:100px"/>
+                            <field name="project_description" string="Description" style="height:100px"/>
+                        </group>
+                        <group>
+                            <field name="invite_user" string="Invite User" style="width:200px"/>
+                        </group>
+                    </group>
+                        <group>
+                            <group>
+                                <field name="project_start_date" string="Project Start Date" style="width:100px"/>
+                            </group>
+                            <group>
+                                <field name="project_end_date" string="Project End Date" style="width:100px"/>
+                            </group>
+                            <group>
+                                <field name="notification_date" string="Notification Date" style="width:100px"/>
+                            </group>
+                        </group>
+                        <field name="methodology" string="Methodology" invisible="1"/>
+
+
+                <group string="Budget">
+                    <group>
+                        <field name="project_budget" string="Project Budget" style="width:200px"/>
                     </group>
                     <group>
-                        <field name="invite_user" string="Invite User"/>
-                        <field name="project_start_date" string="Project Start Date"/>
-                        <field name="project_end_date" string="Project End Date"/>
-                        <field name="notification_date" string="Set Remainder for End date"/>
-                        <field name="methodology" string="Methodology" invisible="1"/>
+                        <field name="fixed_budget" style="width:100px" attrs="{'invisible': [('project_budget', '!=', 'fixed')]}"/>
+                        <field name="weekly_budget" style="width:100px" attrs="{'invisible': [('project_budget', '!=', 'weekly')]}"/>
+                        <field name="custom_price" style="width:100px" attrs="{'invisible': [('project_budget', '!=', 'custom')]}"/>
+                        <field name="custom_hours" style="width:100px" attrs="{'invisible': [('project_budget', '!=', 'custom')]}"/>
+                        <field name="custom_minutes" style="width:100px" attrs="{'invisible': [('project_budget', '!=', 'custom')]}"/>
                     </group>
-
-                    <group string="Budget">
-                        <field name="project_budget" string="Project Budget"/>
-                        <field name="fixed_budget" attrs="{'invisible': [('project_budget', '!=', 'fixed')]}"/>
-                        <field name="weekly_budget" attrs="{'invisible': [('project_budget', '!=', 'weekly')]}"/>
-                        <field name="custom_price" attrs="{'invisible': [('project_budget', '!=', 'custom')]}"/>
-                        <field name="custom_hours" attrs="{'invisible': [('project_budget', '!=', 'custom')]}"/>
-                        <field name="custom_minutes" attrs="{'invisible': [('project_budget', '!=', 'custom')]}"/>
-                    </group>
-                </xpath>
-            </field>
-        </record>
-        <record id="project_inherit_phase_view" model="ir.ui.view">
-            <field name="name">project.inherit.phase.view</field>
-            <field name="model">project.project</field>
-            <field name = "inherit_id" ref="project.edit_project"/>
-            <field name="arch" type="xml">
-                <xpath expr="//group" position="after">
-                    <group string="Project Details">
-                        <field name="project_description" string="Description" style="height:100px"/>
-                        <field name="invite_user" string="Invite User"/>
-                        <field name="project_start_date" string="Project Start Date"/>
-                        <field name="project_end_date" string="Project End Date"/>
-                        <field name="notification_date" string="Notification Date"/>
-                        <field name="methodology" string="Methodology"/>
-                    </group>
-                    <group string="Budget">
-                        <field name="project_budget" string="Project Budget"/>
-                        <field name="fixed_budget" attrs="{'invisible': [('project_budget', '!=', 'fixed')]}"/>
-                        <field name="weekly_budget" attrs="{'invisible': [('project_budget', '!=', 'weekly')]}"/>
-                        <field name="custom_price" attrs="{'invisible': [('project_budget', '!=', 'custom')]}"/>
-                        <field name="custom_hours" attrs="{'invisible': [('project_budget', '!=', 'custom')]}"/>
-                        <field name="custom_minutes" attrs="{'invisible': [('project_budget', '!=', 'custom')]}"/>
-                    </group>
-                </xpath>
-            </field>
-        </record>
-    </data>
-</odoo>
+                </group>
+            </xpath>
+        </field>
+    </record>
+    <record id="project_inherit_phase_view" model="ir.ui.view">
+        <field name="name">project.inherit.phase.view</field>
+        <field name="model">project.project</field>
+        <field name = "inherit_id" ref="project.edit_project"/>
+        <field name="arch" type="xml">
+            <xpath expr="//group" position="after">
+                <group string="Project Details">
+                    <field name="project_description" string="Description" style="height:100px"/>
+                    <field name="invite_user" string="Invite User"/>
+                    <field name="project_start_date" string="Project Start Date" />
+                    <field name="project_end_date" string="Project End Date" />
+                    <field name="notification_date" string="Notification Date"/>
+                    <field name="methodology" string="Methodology"/>
+                </group>
+                <group string="Budget">
+                    <field name="project_budget" string="Project Budget"/>
+                    <field name="fixed_budget" attrs="{'invisible': [('project_budget', '!=', 'fixed')]}"/>
+                    <field name="weekly_budget" attrs="{'invisible': [('project_budget', '!=', 'weekly')]}"/>
+                    <field name="custom_price" attrs="{'invisible': [('project_budget', '!=', 'custom')]}"/>
+                    <field name="custom_hours" attrs="{'invisible': [('project_budget', '!=', 'custom')]}"/>
+                    <field name="custom_minutes" attrs="{'invisible': [('project_budget', '!=', 'custom')]}"/>
+                </group>
+            </xpath>
+        </field>
+    </record>
+</data>
+        </odoo>

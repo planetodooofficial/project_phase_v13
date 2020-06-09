@@ -4,13 +4,15 @@ from odoo import models, api, _, fields
 class ProjectInherit(models.Model):
     _inherit = "project.project"
 
-    partner_id = fields.Many2one('res.partner', string='Client', auto_join=True, tracking=True, domain="['|', ('company_id', '=', False), ('company_id', '=', company_id)]")
+    company_id = fields.Many2one('res.company', string='Company', required=True, default=lambda self: self.env.company)
+    partner_id = fields.Many2one('res.partner', string='Client', auto_join=True, tracking=True)
     project_description = fields.Char("Description")
     invite_user = fields.Char("Invite User")
     project_start_date = fields.Date("Project Start Date")
     project_end_date = fields.Date("Project End Date")
     notification_date = fields.Date("Notification Date")
     project_budget = fields.Selection([("fixed", "Fixed Budget"),
+
                                        ("weekly", "Weekly Budget"),
                                        ("custom", "Custom Budget")])
     fixed_budget = fields.Monetary("Total Budget")
@@ -25,13 +27,6 @@ class ProjectInherit(models.Model):
         self.methodology = dict(active_id._fields['method_name'].selection).get(active_id.method_name)
         stage_obj = self.env["project.task.type"].search([('method_name', '=', self.methodology)])
         if active_id.method_name == 'agile':
-            if stage_obj:
-                for rec in stage_obj:
-                    vals = {
-                        'project_ids': [(4, self.ids)]
-                    }
-                    rec.write(vals)
-            else:
                 self.env["project.task.type"].create({'name': "Requirement Gathering",
                                                       'project_ids': [(6, 0, self.ids)],
                                                       'method_name': dict(
