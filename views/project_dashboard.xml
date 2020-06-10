@@ -31,12 +31,101 @@
                 </kanban>
             </field>
         </record>
+        <record model="ir.ui.view" id="view_project_kanban_inherit">
+            <field name="name">project.project.kanban.inherit</field>
+            <field name="model">project.project</field>
+            <field name="inherit_id" ref="project.view_project_kanban"/>
+            <field name="arch" type="xml">
+                <xpath expr="//kanban[@class='oe_background_grey o_kanban_dashboard o_project_kanban o_emphasize_colors']" position="replace">
+                <kanban class="oe_background_grey o_kanban_dashboard o_project_kanban o_emphasize_colors" on_create="project_phases_v13.action_project_dashboard">
+                    <field name="name"/>
+                    <field name="partner_id"/>
+                    <field name="color"/>
+                    <field name="task_count"/>
+                    <field name="label_tasks"/>
+                    <field name="alias_id"/>
+                    <field name="alias_name"/>
+                    <field name="alias_domain"/>
+                    <field name="is_favorite"/>
+                    <field name="rating_percentage_satisfaction"/>
+                    <field name="rating_status"/>
+                    <field name="analytic_account_id"/>
+                    <templates>
+                        <t t-name="kanban-box">
+                            <div t-attf-class="#{kanban_color(record.color.raw_value)} oe_kanban_global_click o_has_icon">
+                                <div class="o_project_kanban_main">
+                                    <div class="o_kanban_card_content">
+                                        <div class="o_kanban_primary_left">
+                                            <div class="o_primary">
+                                                <span><t t-esc="record.name.value"/></span>
+                                                <span t-if="record.partner_id.value">
+                                                    <strong><t t-esc="record.partner_id.value"/></strong>
+                                                </span>
+                                            </div>
+                                            <div t-if="record.alias_name.value and record.alias_domain.value">
+                                                <span><i class="fa fa-envelope" role="img" aria-label="Domain Alias" title="Domain Alias"></i> <t t-esc="record.alias_id.value"/></span>
+                                            </div>
+                                            <div t-if="record.rating_status.raw_value != 'no'" class="mt8 text-primary" title="Percentage of happy ratings over the past 30 days. Get rating details from the More menu." groups="project.group_project_rating">
+                                                <b>
+                                                    <t t-if="record.rating_percentage_satisfaction.value == -1">
+                                                        <i class="fa fa-smile-o"/> No rating yet
+                                                    </t>
+                                                    <t t-if="record.rating_percentage_satisfaction.value != -1">
+                                                        <a name="action_view_all_rating" type="object" context="{'search_default_rating_last_30_days':1}">
+                                                            <i class="fa fa-smile-o" role="img" aria-label="Percentage of satisfaction" title="Percentage of satisfaction"/> <t t-esc="record.rating_percentage_satisfaction.value"/>%
+                                                        </a>
+                                                    </t>
+                                                </b>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="o_kanban_card_manage_pane dropdown-menu" groups="project.group_project_manager" role="menu">
+                                        <div class="o_kanban_card_manage_section o_kanban_manage_reports">
+                                            <div role="menuitem">
+                                                <a name="%(portal.portal_share_action)d" type="action">Share</a>
+                                            </div>
+                                            <div role="menuitem">
+                                                <a type="edit">Edit</a>
+                                            </div>
+                                            <div role="menuitem" t-if="record.rating_status.raw_value != 'no'">
+                                                <a name="action_view_all_rating" type="object">Customer Ratings</a>
+                                            </div>
+                                        </div>
+                                        <div role="menuitem" aria-haspopup="true" class="o_no_padding_kanban_colorpicker">
+                                            <ul class="oe_kanban_colorpicker" data-field="color" role="popup"/>
+                                        </div>
+                                    </div>
+                                    <a class="o_kanban_manage_toggle_button o_left" href="#" groups="project.group_project_manager"><i class="fa fa-ellipsis-v" role="img" aria-label="Manage" title="Manage"/></a>
+                                    <span class="o_right"><field name="is_favorite" widget="boolean_favorite" nolabel="1" force_save="1" /></span>
+                                </div>
+
+                                <div class="o_project_kanban_boxes">
+                                    <a class="o_project_kanban_box" name="%(project.act_project_project_2_project_task_all)d" type="action">
+                                        <div>
+                                            <span class="o_value"><t t-esc="record.task_count.value"/></span>
+                                            <span class="o_label"><t t-esc="record.label_tasks.value"/></span>
+                                        </div>
+                                    </a>
+                                    <a t-if="record.analytic_account_id.raw_value" class="o_project_kanban_box o_project_timesheet_box" name="action_view_account_analytic_line" type="object" groups="analytic.group_analytic_accounting">
+                                        <div>
+                                            <span class="o_label">Profitability</span>
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
+                        </t>
+                    </templates>
+                </kanban>
+                </xpath>
+            </field>
+        </record>
+
         <record id="action_project_dashboard" model="ir.actions.act_window">
-            <field name="name">Project Dashboard</field>
+            <field name="name">Project Methodology</field>
             <field name="res_model">project.dashboard</field>
             <field name="type">ir.actions.act_window</field>
             <field name="view_mode">kanban</field>
         </record>
-        <menuitem id="project_dashboard_menu" name="Project Dashboard" parent="project.menu_main_pm" action="action_project_dashboard" sequence="11"/>
+        <menuitem id="project_dashboard_menu" name="Project Methodology" parent="project.menu_main_pm" action="action_project_dashboard" sequence="11"/>
     </data>
 </odoo>

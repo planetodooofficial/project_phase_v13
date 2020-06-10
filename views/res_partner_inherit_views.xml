@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <odoo>
-        <record id="res_partner_project" model="ir.ui.view">
-            <field name="name">res.partner.project</field>
-            <field name="model">res.partner</field>
-            <field name="inherit_id" ref="base.view_partner_form"/>
-            <field name="arch" type="xml">
-                <xpath expr="//field[@name='category_id']" position="after">
-                    <group>
-                         <field name="industry_type"/>
-                    </group>
-
-                </xpath>
-            </field>
-        </record>
+    <record id="res_partner_project" model="ir.ui.view">
+        <field name="name">res.partner.project</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//group" position="after">
+                <group>
+                    <field name="industry_type" style="width:200px"/>
+                    <field name="currency_id" style="width:200px"/>
+                </group>
+            </xpath>
+        </field>
+    </record>
 </odoo>

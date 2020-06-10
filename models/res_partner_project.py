@@ -11,3 +11,4 @@ class ResPartner(models.Model):
         ("legal", "Legal Services"), ("manufacture", "Manufacturing"),
         ("media", "Media"), ("retail", "Retail")
     ], string="Industry")
+    currency_id = fields.Many2one('res.currency', string="Currency")
