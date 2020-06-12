@@ -16,13 +16,13 @@ class ProjectInherit(models.Model):
     project_budget = fields.Selection([("fixed", "Fixed Budget"),
                                        ("weekly", "Weekly Budget"),
                                        ("custom", "Custom Budget")])
-    fixed_budget = fields.Monetary("Total Budget")
-    weekly_budget = fields.Monetary("Weekly Budget")
-    custom_price = fields.Monetary("Price per hour")
+    fixed_budget = fields.Monetary("Total Budget",currency_field='currency_id')
+    weekly_budget = fields.Monetary("Weekly Budget",currency_field='currency_id')
+    custom_price = fields.Monetary("Price per hour",currency_field='currency_id')
     custom_hours = fields.Integer("Hours")
     custom_minutes = fields.Integer("Minutes")
     # total_custom_price = fields.Monetary("Total cost", compute="_compute_total_cost")
-    total_custom_price = fields.Monetary("Total cost")
+    total_custom_price = fields.Monetary("Total cost",currency_field='currency_id')
     methodology = fields.Char("Methodology")
 
     @api.model

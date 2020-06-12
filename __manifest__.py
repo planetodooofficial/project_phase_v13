@@ -9,9 +9,11 @@
     'depends': ['base', 'web', 'project', 'hr_timesheet', 'account'],
     'data': [
         'data/project_dashboard.xml',
+        'data/chat_message.xml',
         'security/project_user_acess.xml',
         'security/ir.model.access.csv',
         # 'views/project_phases_view.xml',
+        # 'views/sidebar.xml',
         'views/res_partner_inherit_views.xml',
         'views/project_dashboard.xml',
         'views/project_inherit_views.xml',

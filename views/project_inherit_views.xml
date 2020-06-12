@@ -62,14 +62,18 @@
                         <field name="methodology" string="Methodology"/>
                     </group>
                     <group string="Budget">
-                        <field name="currency_id" invisible="1"/>
+
                         <field name="project_budget" string="Project Budget"/>
-                        <field name="fixed_budget" attrs="{'invisible': [('project_budget', '!=', 'fixed')]}"/>
-                        <field name="weekly_budget" attrs="{'invisible': [('project_budget', '!=', 'weekly')]}"/>
+                        <field name="currency_id" invisible="1" />
+                        <field name="fixed_budget" attrs="{'invisible': [('project_budget', '!=', 'fixed')]}"
+                               widget="monetary" options="{'currency_field': 'currency_id'}"/>
+                        <field name="weekly_budget" attrs="{'invisible': [('project_budget', '!=', 'weekly')]}"
+                               widget="monetary" options="{'currency_field': 'currency_id'}"/>
                         <field name="custom_price" attrs="{'invisible': [('project_budget', '!=', 'custom')]}"/>
                         <field name="custom_hours" attrs="{'invisible': [('project_budget', '!=', 'custom')]}"/>
                         <field name="custom_minutes" attrs="{'invisible': [('project_budget', '!=', 'custom')]}"/>
-                        <field name="total_custom_price" style="width:100px" attrs="{'invisible': [('project_budget', '!=', 'custom')]}"/>
+                        <field name="total_custom_price" style="width:100px" attrs="{'invisible': [('project_budget', '!=', 'custom')]}"
+                               widget="monetary" options="{'currency_field': 'currency_id'}"/>
                     </group>
                 </xpath>
             </field>

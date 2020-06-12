@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="0">
+        <record model="mail.channel" id="project_discussion_channel">
+            <field name="name">Project Discussions</field>
+                <field name="public">private</field>
+            <field name="description">Discussion about projects.</field>
+        </record>
+        <record model="mail.channel" id="general_updates_channel">
+            <field name="name">General Updates</field>
+                <field name="public">public</field>
+            <field name="description">General announcements and updates</field>
+        </record>
+    </data>
+</odoo>
