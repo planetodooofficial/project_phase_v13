@@ -16,13 +16,12 @@ class ProjectInherit(models.Model):
     project_budget = fields.Selection([("fixed", "Fixed Budget"),
                                        ("weekly", "Weekly Budget"),
                                        ("custom", "Custom Budget")])
-    fixed_budget = fields.Monetary("Total Budget",currency_field='currency_id')
-    weekly_budget = fields.Monetary("Weekly Budget",currency_field='currency_id')
-    custom_price = fields.Monetary("Price per hour",currency_field='currency_id')
+    fixed_budget = fields.Monetary("Total Budget", currency_field='currency_id')
+    weekly_budget = fields.Monetary("Weekly Budget", currency_field='currency_id')
+    custom_price = fields.Monetary("Price per hour", currency_field='currency_id')
     custom_hours = fields.Integer("Hours")
     custom_minutes = fields.Integer("Minutes")
-    # total_custom_price = fields.Monetary("Total cost", compute="_compute_total_cost")
-    total_custom_price = fields.Monetary("Total cost",currency_field='currency_id')
+    total_custom_price = fields.Monetary("Total cost", currency_field='currency_id', compute="_compute_total_cost")
     methodology = fields.Char("Methodology")
 
     @api.model
@@ -34,21 +33,24 @@ class ProjectInherit(models.Model):
             project.subtask_project_id = project.id
         if project.privacy_visibility == 'portal' and project.partner_id:
             project.message_subscribe(project.partner_id.ids)
+        channel_obj = self.env["mail.channel"].create({
+            'name': self.name
+        })
         return project
 
-    # def _compute_total_cost(self):
-    #     if self.custom_price == 0.0:
-    #         raise UserError(_('Please Enter the base price'))
-    #     elif self.custom_hours == 0 and self.custom_minutes == 0:
-    #         raise UserError(_('Please enter the hours or minutes of the project.'))
-    #     else:
-    #         if self.custom_minutes == 0:
-    #             self.total_custom_price = self.custom_hours * self.custom_price
-    #         elif self.custom_hours == 0:
-    #             self.total_custom_price = self.custom_minutes * self.custom_price
-    #         else:
-    #             self.total_custom_price = self.custom_price * self.custom_minutes * self.custom_hours
-    #     return
+    def _compute_total_cost(self):
+        if self.custom_price == 0.0:
+            raise UserError(_('Please Enter the base price'))
+        elif self.custom_hours == 0 and self.custom_minutes == 0:
+            raise UserError(_('Please enter the hours or minutes of the project.'))
+        else:
+            if self.custom_minutes == 0:
+                self.total_custom_price = self.custom_hours * self.custom_price
+            elif self.custom_hours == 0:
+                self.total_custom_price = self.custom_minutes * self.custom_price
+            else:
+                self.total_custom_price = self.custom_price * self.custom_minutes * self.custom_hours
+        return
 
     def open_tasks(self):
         active_id = self.env["project.dashboard"].browse(self.env.context.get('active_ids'))

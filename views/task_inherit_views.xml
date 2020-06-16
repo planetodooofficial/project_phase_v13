@@ -17,26 +17,32 @@
             <field name="arch" type="xml">
                 <xpath expr="//notebook/page[@name='description_page']" position="after">
                     <page string="History" id="history_tab">
-                                <div class="page">
-                                    <table class="table table-bordered mt32">
-                                        <thead>
-                                            <tr>
-                                                <th class="text-center"><span>Creation Date</span></th>
-                                                <th class="text-center"><span>Assigned to</span></th>
-                                                <th class="text-center"><span>Update Disposition</span></th>
-                                                <th class="text-center"><span>Update Date</span></th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr class="text-center">
-                                                <td><field name="date_assign"/></td>
-                                                <td><field name="user_id"/></td>
-                                                <td><field name="updated_issue"/></td>
-                                                <td><field name="date_last_stage_update"/></td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
+                                    <tree string="History" editable="bottom">
+                                        <field name="date_assign" required="1"/>
+                                        <field name="user_id" readonly="1"/>
+<!--                                        <field name="updated_issue"/>-->
+                                        <field name="date_last_stage_update"/>
+                                    </tree>
+<!--                                <div class="page">-->
+<!--                                    <table class="table table-bordered mt32">-->
+<!--                                        <thead>-->
+<!--                                            <tr>-->
+<!--                                                <th class="text-center"><span>Creation Date</span></th>-->
+<!--                                                <th class="text-center"><span>Assigned to</span></th>-->
+<!--                                                <th class="text-center"><span>Update Disposition</span></th>-->
+<!--                                                <th class="text-center"><span>Update Date</span></th>-->
+<!--                                            </tr>-->
+<!--                                        </thead>-->
+<!--                                        <tbody>-->
+<!--                                            <tr class="text-center">-->
+<!--                                                <td><field name="date_assign"/></td>-->
+<!--                                                <td><field name="user_id"/></td>-->
+<!--                                                <td><field name="updated_issue"/></td>-->
+<!--                                                <td><field name="date_last_stage_update"/></td>-->
+<!--                                            </tr>-->
+<!--                                        </tbody>-->
+<!--                                    </table>-->
+<!--                                </div>-->
                     </page>
                 </xpath>
             </field>

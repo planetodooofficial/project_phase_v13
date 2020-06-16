@@ -16,7 +16,7 @@
         'views/project_dashboard.xml',
         'views/project_inherit_views.xml',
         'views/project_stages_view.xml',
-        'views/task_inherit_views.xml',
+        # 'views/task_inherit_views.xml',
     ],
     'demo': [],
     'installable': True,
