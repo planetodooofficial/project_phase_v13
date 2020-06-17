@@ -60,6 +60,7 @@
                         <field name="project_end_date" string="Project End Date" />
                         <field name="notification_date" string="Notification Date"/>
                         <field name="methodology" string="Methodology"/>
+                        <field name="channel_id" string="Channel"/>
                     </group>
                     <group string="Budget">
 

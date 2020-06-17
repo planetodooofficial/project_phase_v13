@@ -23,6 +23,7 @@ class ProjectInherit(models.Model):
     custom_minutes = fields.Integer("Minutes")
     total_custom_price = fields.Monetary("Total cost", currency_field='currency_id', compute="_compute_total_cost")
     methodology = fields.Char("Methodology")
+    channel_id = fields.Many2one('mail.channel', string='Channel', ondelete='cascade')
 
     @api.model
     def create(self, vals):
@@ -33,23 +34,23 @@ class ProjectInherit(models.Model):
             project.subtask_project_id = project.id
         if project.privacy_visibility == 'portal' and project.partner_id:
             project.message_subscribe(project.partner_id.ids)
-        channel_obj = self.env["mail.channel"].create({
-            'name': self.name
-        })
         return project
 
     def _compute_total_cost(self):
-        if self.custom_price == 0.0:
-            raise UserError(_('Please Enter the base price'))
-        elif self.custom_hours == 0 and self.custom_minutes == 0:
-            raise UserError(_('Please enter the hours or minutes of the project.'))
-        else:
-            if self.custom_minutes == 0:
-                self.total_custom_price = self.custom_hours * self.custom_price
-            elif self.custom_hours == 0:
-                self.total_custom_price = self.custom_minutes * self.custom_price
+        if self.project_budget == "custom":
+            if self.custom_price == 0.0:
+                raise UserError(_('Please Enter the base price'))
+            elif self.custom_hours == 0 and self.custom_minutes == 0:
+                raise UserError(_('Please enter the hours or minutes of the project.'))
             else:
-                self.total_custom_price = self.custom_price * self.custom_minutes * self.custom_hours
+                if self.custom_minutes == 0:
+                    self.total_custom_price = self.custom_hours * self.custom_price
+                elif self.custom_hours == 0:
+                    self.total_custom_price = self.custom_minutes * self.custom_price
+                else:
+                    self.total_custom_price = self.custom_price * self.custom_minutes * self.custom_hours
+        else:
+            self.total_custom_price = 0
         return
 
     def open_tasks(self):
@@ -67,7 +68,8 @@ class ProjectInherit(models.Model):
                                                       active_id.method_name)})
             self.env["project.task.type"].create({'name': "Testing", 'project_ids': [(6, 0, self.ids)],
                                                   'method_name': dict(
-                                                      active_id._fields['method_name'].selection).get(
+                                                      active_id._fields[
+                                                          'method_name'].selection).get(
                                                       active_id.method_name)})
             self.env["project.task.type"].create({'name': "Delivery", 'project_ids': [(6, 0, self.ids)],
                                                   'method_name': dict(
@@ -151,4 +153,14 @@ class ProjectInherit(models.Model):
                 {'name': "Managing stage boundaries", 'project_ids': [(6, 0, self.ids)],
                  'method_name': dict(active_id._fields['method_name'].selection).get(active_id.method_name)})
             self.env["project.task.type"].create({'name': "Closing", 'project_ids': [(6, 0, self.ids)]})
+        channel_obj = self.env["mail.channel"]
+        channel_obj.create({
+            'name': self.name,
+        })
+        channel_obj1 = channel_obj.search([('name', '=', self.name)])
+        for res in self.invite_user:
+            channel_obj2 = channel_obj1.write({
+                'channel_last_seen_partner_ids': [(0, 0, {'partner_id': res.partner_id.id})]
+            })
+        self.channel_id = channel_obj1.id
         return super(ProjectInherit, self).open_tasks()

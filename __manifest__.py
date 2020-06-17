@@ -6,7 +6,7 @@
     "description": """Project management using project methodologies.""",
     "author": "Planet-odoo",
     'website': 'http://www.planet-odoo.com/',
-    'depends': ['base', 'web', 'hr_timesheet', 'project', 'account'],
+    'depends': ['base', 'web', 'project', 'account'],
     'data': [
         'data/project_dashboard.xml',
         'data/chat_message.xml',
