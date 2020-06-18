@@ -13,7 +13,7 @@
         <record model="ir.ui.view" id="view_task_form2_phase">
             <field name="name">project.task.form.phase</field>
             <field name="model">project.task</field>
-            <field name="inherit_id" ref="project.view_task_form2" />
+
             <field name="arch" type="xml">
                 <xpath expr="//notebook/page[@name='description_page']" position="after">
                     <page string="History" id="history_tab">

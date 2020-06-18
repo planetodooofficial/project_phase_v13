@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+        <record id="mail_project_phases" model="mail.template">
+            <field name="name">Notification: Project Deadline</field>
+            <field name="model_id" ref="project.model_project_project"/>
+            <field name="subject">Project Deadline Remainder</field>
+            <field name="email_to">${ctx.get('object.user_id.login') | safe}</field>
+            <field name="body_html" type="html">
+                <p>The Project ${ctx['name']} is set to end. Please check the details below. </p>
+                <p>The details of the project are follows:
+                    <ol>
+                        <li>Project Name:${ctx['name']}</li>
+                        <li>Project Start Date:${ctx['project_start_date']}</li>
+                        <li>Project End Date:${ctx['project_end_date']}</li>
+                    </ol>
+                </p>
+            </field>
+        </record>
+    </data>
+</odoo>
