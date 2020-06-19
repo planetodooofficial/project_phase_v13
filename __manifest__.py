@@ -6,7 +6,7 @@
     "description": """Project management using project methodologies.""",
     "author": "Planet-odoo",
     'website': 'http://www.planet-odoo.com/',
-    'depends': ['base', 'web', 'project', 'account'],
+    'depends': ['base', 'web', 'project', 'account','hr_timesheet'],
     'data': [
         'data/project_dashboard.xml',
         'data/chat_message.xml',
@@ -17,7 +17,7 @@
         'views/project_dashboard.xml',
         'views/project_inherit_views.xml',
         'views/project_stages_view.xml',
-        # 'views/task_inherit_views.xml',
+        'views/task_inherit_views.xml',
     ],
     'demo': [],
     'installable': True,

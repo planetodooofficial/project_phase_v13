@@ -29,8 +29,6 @@
                         </group>
                     </group>
                     <field name="methodology" string="Methodology" invisible="1"/>
-
-
                     <group string="Budget">
                         <group>
                             <field name="project_budget" string="Project Budget" style="width:200px"/>
