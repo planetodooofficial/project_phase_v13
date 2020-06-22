@@ -18,6 +18,7 @@
         'views/project_inherit_views.xml',
         'views/project_stages_view.xml',
         'views/task_inherit_views.xml',
+        'views/announcement_panel.xml',
     ],
     'demo': [],
     'installable': True,
