@@ -42,9 +42,37 @@
         </template>
         <template id="announce_create">
             <t t-set="title">Announcement</t>
+            <t t-set="description">
+                Create Announcements.
+            </t>
             <t t-set="btn_text">Create Announcement</t>
             <t t-set="method" t-value="'action_open_base_onboarding_company'" />
             <t t-set="model" t-value="'announcement.panel'" />
+        </template>
+        <template id="onboarding_container">
+            <div class="modal o_onboarding_modal o_technical_modal" tabindex="-1" role="dialog">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Remove Announcement Panel</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-label="Close">&amp;times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <p>Do you want to remove this configuration panel?</p>
+                        </div>
+                        <div class="modal-footer">
+                            <a type="action" class="btn btn-primary" data-dismiss="modal"
+                               data-toggle="collapse" href=".o_onboarding_container"
+                               t-att-data-model="close_model" t-att-data-method="close_method">
+                                Remove
+                            </a>
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Discard</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </template>
     </data>
 </odoo>
