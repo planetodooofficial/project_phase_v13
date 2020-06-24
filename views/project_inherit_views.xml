@@ -11,10 +11,19 @@
                         <group>
                             <field name = "company_id" invisible="1"/>
                             <field name = "partner_id" style="width:100px"/>
-                            <field name="project_description" string="Description" style="height:100px"/>
+                        </group>
+                        <group>
+                            <div class="o_composer_input">
+                                <label for="project_description" string="Description"/>
+                                <field name="project_description" string="Description" style="height:100px"/>
+                                <div class="o_chatter_composer_tools">
+                                    <button tabindex="5" class="btn btn-secondary fa fa-paperclip o_composer_button_add_attachment" type="button" aria-label="Add attachment" title="Add attachment"/>
+                                </div>
+                            </div>
                         </group>
                         <group>
                             <field name="invite_user" string="Invite User" style="width:200px" widget="many2many_tags"/>
+                            <field name="enable_chat" required="1" widget="radio" options="{'horizontal': true}"/>
                         </group>
                     </group>
                     <group>
@@ -74,6 +83,21 @@
                         <field name="total_custom_price" style="width:100px" attrs="{'invisible': [('project_budget', '!=', 'custom')]}"
                                widget="monetary" options="{'currency_field': 'currency_id'}"/>
                     </group>
+                </xpath>
+            </field>
+        </record>
+        <record id="open_project_kanban_inherited" model="ir.ui.view">
+            <field name="name">project.project.open.kanban.inherited</field>
+            <field name="model">project.project</field>
+            <field name="inherit_id" ref="project.view_project_kanban"/>
+            <field name="priority">24</field>
+            <field name="arch" type="xml">
+                <xpath expr="//div[hasclass('o_project_kanban_boxes')]" position="inside">
+                    <a class="o_project_kanban_box o_project_timesheet_box" name="%(project.open_view_project_all)d" type="action">
+                        <div>
+                            <span class="o_label">View Project</span>
+                        </div>
+                    </a>
                 </xpath>
             </field>
         </record>

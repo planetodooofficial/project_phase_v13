@@ -12,7 +12,7 @@ class AnnouncementPanel(http.Controller):
                 company.account_invoice_onboarding_state == 'closed':
             return {}
         return {
-            'html': request.env.ref('project_phase_v13.announcement_panel_template').render({
+            'html': request.env.ref('project_phases_v13.announcement_panel_template').render({
                 'company': company,
                 'state': company.get_and_update_account_invoice_onboarding_state()
             })

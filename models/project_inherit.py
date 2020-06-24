@@ -24,6 +24,10 @@ class ProjectInherit(models.Model):
     total_custom_price = fields.Monetary("Total cost", currency_field='currency_id', compute="_compute_total_cost")
     methodology = fields.Char("Methodology")
     channel_id = fields.Many2one('mail.channel', string='Channel', ondelete='cascade')
+    enable_chat = fields.Selection([
+        ("yes", "Yes"),
+        ("no", "No")
+    ], string="Create Chat Channel", default='yes')
 
     @api.model
     def create(self, vals):
@@ -153,14 +157,19 @@ class ProjectInherit(models.Model):
                 {'name': "Managing stage boundaries", 'project_ids': [(6, 0, self.ids)],
                  'method_name': dict(active_id._fields['method_name'].selection).get(active_id.method_name)})
             self.env["project.task.type"].create({'name': "Closing", 'project_ids': [(6, 0, self.ids)]})
-        channel_obj = self.env["mail.channel"]
-        channel_obj.create({
-            'name': self.name,
-        })
-        channel_obj1 = channel_obj.search([('name', '=', self.name)])
-        for res in self.invite_user:
-            channel_obj2 = channel_obj1.write({
-                'channel_last_seen_partner_ids': [(0, 0, {'partner_id': res.partner_id.id})]
+        if self.enable_chat == 'yes':
+            channel_obj = self.env["mail.channel"]
+            channel_obj.create({
+                'name': self.name,
             })
-        self.channel_id = channel_obj1.id
+            message_user = []
+            channel_obj1 = channel_obj.search([('name', '=', self.name)])
+            for res in self.invite_user:
+                channel_obj2 = channel_obj1.write({
+                    'channel_last_seen_partner_ids': [(0, 0, {'partner_id': res.partner_id.id})]
+                })
+                message = _("%s has been added to the channel</br>") % res.partner_id.name
+                channel_obj1.sudo().message_post(body=message, message_type="comment", subtype="mail.mt_comment")
+            self.channel_id = channel_obj1.id
+
         return super(ProjectInherit, self).open_tasks()

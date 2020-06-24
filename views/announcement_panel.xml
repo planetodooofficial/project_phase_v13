@@ -31,13 +31,13 @@
                 </xpath>
             </field>
         </record>
-        <template id="announcement_panel_template" name="project_phase_v13.announcement.panel">
+        <template id="announcement_panel_template" name="project_phases_v13.announcement.panel">
             <t t-call="base.onboarding_container">
                 <t t-set="classes" t-value="'o_onboarding_blue'"/>
                 <t t-set="bg_image" t-value="'/account/static/src/img/account_invoice_onboarding_bg.jpg'"/>
                 <t t-set="close_model" t-value="'announcement.panel'"/>
                 <t t-set="text_completed">Announcement Created.</t>
-                <t t-call="project_phase_v13.announce_create" name="announce_create_panel" />
+                <t t-call="project_phases_v13.announce_create" name="announce_create_panel" />
             </t>
         </template>
         <template id="announce_create">
