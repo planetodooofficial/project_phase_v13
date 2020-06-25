@@ -28,6 +28,7 @@ class ProjectInherit(models.Model):
         ("yes", "Yes"),
         ("no", "No")
     ], string="Create Chat Channel", default='yes')
+    announce_count = fields.Integer(string="Announcements")
 
     @api.model
     def create(self, vals):

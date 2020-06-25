@@ -1,2 +1,3 @@
 id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
 access_project_dashboard,access.project.dashboard,model_project_dashboard,,1,1,1,1
+access_announcement_panel,access.announcement.panel,model_announcement_panel,,1,1,1,1

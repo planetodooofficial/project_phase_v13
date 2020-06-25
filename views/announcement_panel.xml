@@ -37,17 +37,19 @@
                 <t t-set="bg_image" t-value="'/account/static/src/img/account_invoice_onboarding_bg.jpg'"/>
                 <t t-set="close_model" t-value="'announcement.panel'"/>
                 <t t-set="text_completed">Announcement Created.</t>
-                <t t-call="project_phases_v13.announce_create" name="announce_create_panel" />
+                <t t-call="project_phases_v13.onboarding_company_step" name="announce_create_panel" />
             </t>
         </template>
-        <template id="announce_create">
-            <t t-set="title">Announcement</t>
-            <t t-set="description">
-                Create Announcements.
+        <template id="onboarding_company_step">
+            <t t-call="base.onboarding_step">
+                <t t-set="title">Announcement</t>
+                <t t-set="description" t-value="announce_title">
+                </t>
+                <t t-set="btn_text">Create Announcement</t>
+                <t t-set="action" t-value="'%(project_phases_v13.announcement_action)d'" />
+                <t t-set="model" t-value="'announcement.panel'" />
+                <!--                <t t-set="state" t-value="state.get('base_onboarding_company_state')" />-->
             </t>
-            <t t-set="btn_text">Create Announcement</t>
-            <t t-set="method" t-value="'action_open_base_onboarding_company'" />
-            <t t-set="model" t-value="'announcement.panel'" />
         </template>
         <template id="onboarding_container">
             <div class="modal o_onboarding_modal o_technical_modal" tabindex="-1" role="dialog">
@@ -60,7 +62,7 @@
                             </button>
                         </div>
                         <div class="modal-body">
-                            <p>Do you want to remove this configuration panel?</p>
+                            <p>Do you want to remove this announcement panel?</p>
                         </div>
                         <div class="modal-footer">
                             <a type="action" class="btn btn-primary" data-dismiss="modal"
@@ -74,5 +76,56 @@
                 </div>
             </div>
         </template>
+        <record id="announcement_project_inherit" model="ir.ui.view">
+            <field name="name">announcement.panel.add.form.data</field>
+            <field name="model">project.project</field>
+            <field name="inherit_id" ref="project.edit_project"/>
+            <field name="arch" type="xml">
+                <div name="button_box" position="inside">
+                    <button class="oe_stat_button" name="%(project_phases_v13.announcement_action)d" type="action" icon="fa-bullhorn">
+                        <newline/>
+                        <div class="o_stat_info">
+                            <span class="o_stat_text">Announcements</span>
+                        </div>
+                    </button>
+                </div>
+            </field>
+        </record>
+        <record id="announcement_form" model="ir.ui.view">
+            <field name="name">announcement.form.data</field>
+            <field name="model">announcement.panel</field>
+            <field name="arch" type="xml">
+                <form string="Announcements">
+                    <group>
+                        <field name = "announce_title"/>
+                        <field name = "announce_description"/>
+                        <field name = "project_id"/>
+                    </group>
+                    <footer>
+                        <button string="Save" class="btn-primary" type="object" name="announcement_save"/>
+                        <button special="cancel" string="Cancel"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+        <record id="announcement_tree" model="ir.ui.view">
+            <field name="name">announcement.tree.data</field>
+            <field name="model">announcement.panel</field>
+            <field name="arch" type="xml">
+                <tree string="Announcements">
+                    <field name = "announce_title"/>
+                    <field name = "announce_description"/>
+                    <field name = "project_id"/>
+                </tree>
+            </field>
+        </record>
+        <record id="announcement_action" model="ir.actions.act_window">
+            <field name="name">Announcements</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">announcement.panel</field>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="announcement_form" />
+            <field name="target">new</field>
+        </record>
     </data>
 </odoo>
