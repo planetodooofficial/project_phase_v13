@@ -93,7 +93,7 @@
             <field name="priority">24</field>
             <field name="arch" type="xml">
                 <xpath expr="//div[hasclass('o_project_kanban_boxes')]" position="inside">
-                    <a context="{'search_default_project': 'project_id'}" class="o_project_kanban_box o_project_timesheet_box" name="%(project.open_view_project_all_config)d" type="action">
+                    <a class="o_project_kanban_box o_project_timesheet_box" name="%(project.open_view_project_all_config)d" type="edit">
                         <div>
                             <span class="o_label">
                                     View Project

@@ -32,7 +32,7 @@
             </field>
         </record>
         <template id="announcement_panel_template" name="project_phases_v13.announcement.panel">
-            <t t-call="base.onboarding_container">
+            <t t-call="project_phases_v13.onboarding_container">
                 <t t-set="classes" t-value="'o_onboarding_blue'"/>
                 <t t-set="bg_image" t-value="'/account/static/src/img/account_invoice_onboarding_bg.jpg'"/>
                 <t t-set="close_model" t-value="'announcement.panel'"/>
@@ -40,29 +40,18 @@
                 <t t-call="project_phases_v13.onboarding_company_step" name="announce_create_panel" />
             </t>
         </template>
-        <template id="onboarding_company_step">
-            <t t-call="base.onboarding_step">
-                <t t-set="title">Announcement</t>
-                <t t-set="description" t-value="announce_title">
-                </t>
-                <t t-set="btn_text">Create Announcement</t>
-                <t t-set="action" t-value="'%(project_phases_v13.announcement_action)d'" />
-                <t t-set="model" t-value="'announcement.panel'" />
-                <!--                <t t-set="state" t-value="state.get('base_onboarding_company_state')" />-->
-            </t>
-        </template>
         <template id="onboarding_container">
             <div class="modal o_onboarding_modal o_technical_modal" tabindex="-1" role="dialog">
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title">Remove Announcement Panel</h5>
+                            <h5 class="modal-title">Remove Configuration Tips</h5>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-label="Close">&amp;times;</span>
                             </button>
                         </div>
                         <div class="modal-body">
-                            <p>Do you want to remove this announcement panel?</p>
+                            <p>Do you want to remove this configuration panel?</p>
                         </div>
                         <div class="modal-footer">
                             <a type="action" class="btn btn-primary" data-dismiss="modal"
@@ -75,6 +64,74 @@
                     </div>
                 </div>
             </div>
+            <div class="o_onboarding_container collapse show">
+                <div t-att-class="'o_onboarding ' + classes"
+                     t-att-style="'background-image:url(' + bg_image + ')'">
+                    <div class="o_onboarding_wrap">
+                        <a href="#" data-toggle="modal" data-target=".o_onboarding_modal"
+                           class="float-right o_onboarding_btn_close">
+                            <i class="fa fa-times" title="Close the onboarding panel" />
+                        </a>
+                        <div class="o_onboarding_steps">
+                            <t t-raw="0" />
+                        </div>
+                        <div t-att-class="'o_onboarding_completed_message text-center'">
+                            <i class="fa fa-check text-success mr8" />
+                            <span class="h3 mr16">
+                                <t t-if="text_completed" t-esc="text_completed" />
+                                <t t-else="">Nice work! Your configuration is done.</t>
+                            </span>
+                            <a type="action" class="btn btn-primary" data-toggle="collapse" href=".o_onboarding_container"
+                               t-att-data-model="close_model" t-att-data-method="close_method">
+                                Close
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </template>
+        <template id="onboarding_step">
+            <div style="
+                        flex: 1 1 auto;
+                        align-items: center;
+                        text-align: center;
+                        position: relative;
+                        flex: 1 0 auto;
+                        margin-bottom: 16px;
+                        align-items: baseline;">
+                <div class="o_onboarding_step_content">
+                    <div class="o_onboarding_step_content_info">
+                        <h4 class="o_onboarding_step_title mt16">
+                            <a type="action" data-reload-on-close="true" role="button"
+                               t-att-data-method="method" t-att-data-model="model">
+                                <t t-esc="title" />
+                            </a>
+                        </h4>
+                        <marquee id="announcement" behavior="scroll">
+                            <p class="mb16">
+                                <t t-esc="description" />
+                                <a type="action" data-reload-on-close="true" t-att-data-method="method" t-att-data-model="model" style="color:white;text-decoration: underline;">Read more..</a>
+                            </p>
+                        </marquee>
+                        <a class="o_onboarding_step_action btn" type="action"
+                               data-reload-on-close="true" role="button" t-att-data-action="%(project_phases_v13.announcement_action)d"
+                               t-att-data-model="model">
+                        <t t-if="btn_text" t-esc="btn_text" />
+                        <t t-else="">Create Announcement</t>
+                    </a>
+                    </div>
+                </div>
+            </div>
+
+        </template>
+        <template id="onboarding_company_step">
+            <t t-call="project_phases_v13.onboarding_step">
+                <t t-set="title">Announcement</t>
+                <t t-set="description" t-value="announce_title"/>
+                <t t-set="btn_text">Create Announcement</t>
+                <t t-set="action" t-value="'%(project_phases_v13.announcement_action)d'" />
+                <t t-set="model" t-value="'announcement.panel'" />
+            </t>
         </template>
         <record id="announcement_project_inherit" model="ir.ui.view">
             <field name="name">announcement.panel.add.form.data</field>
@@ -82,7 +139,7 @@
             <field name="inherit_id" ref="project.edit_project"/>
             <field name="arch" type="xml">
                 <div name="button_box" position="inside">
-                    <button class="oe_stat_button" name="%(project_phases_v13.announcement_action)d" type="action" icon="fa-bullhorn">
+                    <button class="oe_stat_button" name="%(project_phases_v13.announcement_action)d" type="edit" icon="fa-bullhorn">
                         <newline/>
                         <div class="o_stat_info">
                             <span class="o_stat_text">Announcements</span>
@@ -90,42 +147,6 @@
                     </button>
                 </div>
             </field>
-        </record>
-        <record id="announcement_form" model="ir.ui.view">
-            <field name="name">announcement.form.data</field>
-            <field name="model">announcement.panel</field>
-            <field name="arch" type="xml">
-                <form string="Announcements">
-                    <group>
-                        <field name = "announce_title"/>
-                        <field name = "announce_description"/>
-                        <field name = "project_id"/>
-                    </group>
-                    <footer>
-                        <button string="Save" class="btn-primary" type="object" name="announcement_save"/>
-                        <button special="cancel" string="Cancel"/>
-                    </footer>
-                </form>
-            </field>
-        </record>
-        <record id="announcement_tree" model="ir.ui.view">
-            <field name="name">announcement.tree.data</field>
-            <field name="model">announcement.panel</field>
-            <field name="arch" type="xml">
-                <tree string="Announcements">
-                    <field name = "announce_title"/>
-                    <field name = "announce_description"/>
-                    <field name = "project_id"/>
-                </tree>
-            </field>
-        </record>
-        <record id="announcement_action" model="ir.actions.act_window">
-            <field name="name">Announcements</field>
-            <field name="type">ir.actions.act_window</field>
-            <field name="res_model">announcement.panel</field>
-            <field name="view_mode">form</field>
-            <field name="view_id" ref="announcement_form" />
-            <field name="target">new</field>
         </record>
     </data>
 </odoo>

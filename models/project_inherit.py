@@ -58,6 +58,18 @@ class ProjectInherit(models.Model):
             self.total_custom_price = 0
         return
 
+    def action_project_view(self):
+        action = self.env.ref('project_phases_v13.view_project_phase').read()[0]
+        action['params'] = {
+            'project_ids': self.ids,
+        }
+        action['context'] = {
+            'active_id': self.id,
+            'active_ids': self.ids,
+            'search_default_name': self.name,
+        }
+        return action
+
     def open_tasks(self):
         active_id = self.env["project.dashboard"].browse(self.env.context.get('active_ids'))
         self.methodology = dict(active_id._fields['method_name'].selection).get(active_id.method_name)

@@ -7,15 +7,17 @@ class AnnouncementPanel(http.Controller):
 
     @http.route('/project_phases_v13/announcements', auth='user', type='json')
     def announcement_panel(self):
-        company = request.env.company
-        if not request.env.is_admin() or \
-                company.account_invoice_onboarding_state == 'closed':
-            return {}
-        return {
-            'html': request.env.ref('project_phases_v13.announcement_panel_template').render({
-                'company': company,
-                'state': company.get_and_update_account_invoice_onboarding_state()
-            })
-        }
-
-
+        announce = request.env["announcement.panel"].sudo().search([])
+        if not announce:
+            return {
+                'html':
+                    request.env.ref('project_phases_v13.announcement_panel_template').render(
+                        {'announce_title': 'No announcements'}
+            )}
+        for ann in announce:
+            announcements = {
+                'html': request.env.ref('project_phases_v13.announcement_panel_template').render({
+                    'announce_title': ann.announce_title
+                })
+            }
+        return announcements
