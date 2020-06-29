@@ -29,6 +29,7 @@ class ProjectInherit(models.Model):
         ("no", "No")
     ], string="Create Chat Channel", default='yes')
     announce_count = fields.Integer(string="Announcements")
+    attachment_ids = fields.Many2many('ir.attachment', string='Files')
 
     @api.model
     def create(self, vals):

@@ -17,7 +17,7 @@
                                 <label for="project_description" string="Description"/>
                                 <field name="project_description" string="Description" style="height:100px"/>
                                 <div class="o_chatter_composer_tools">
-                                    <button tabindex="5" class="btn btn-secondary fa fa-paperclip o_composer_button_add_attachment" type="button" aria-label="Add attachment" title="Add attachment"/>
+                                    <field name="attachment_ids" widget="many2many_binary" string="Attach a file" nolabel="1" colspan="2"/>
                                 </div>
                             </div>
                         </group>

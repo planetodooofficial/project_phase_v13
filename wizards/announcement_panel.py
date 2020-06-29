@@ -1,7 +1,7 @@
 from odoo import models, fields
 
 
-class AnnouncementPanel(models.Model):
+class AnnouncementPanel(models.TransientModel):
     _name = "announcement.panel"
 
     announce_title = fields.Char("Title")

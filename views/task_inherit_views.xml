@@ -10,6 +10,24 @@
                 </xpath>
             </field>
         </record>
+        <record id="project_task_inherit_task_name" model="ir.ui.view">
+            <field name="name">project.task.inherit.name</field>
+            <field name="model">project.task</field>
+            <field name="inherit_id" ref="project.view_task_kanban"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='name']" position="before">
+                    <div>
+                        <field string="Sub-tasks" name="subtask_count" widget="statinfo" invisible="1"/>
+                        <field name="parent_id" invisible="1"/>
+                        <b>
+                            <span attrs="{'invisible' : ['|',('subtask_count', '>', 0),('parent_id', '=', False)]}">Sub-task Of:
+                            <field name="parent_task_name"/>
+                        </span>
+                        </b>
+                    </div>
+                </xpath>
+            </field>
+        </record>
         <record model="ir.ui.view" id="view_task_form2_phase">
             <field name="name">project.task.form.phase</field>
             <field name="model">project.task</field>
@@ -17,28 +35,49 @@
             <field name="arch" type="xml">
                 <xpath expr="//notebook/page[@name='description_page']" position="after">
                     <page string="History" id="history_tab">
-                                <div class="page">
-                                    <table class="table table-bordered mt32">
-                                        <thead>
-                                            <tr>
-                                                <th class="text-center"><span>Creation Date</span></th>
-                                                <th class="text-center"><span>Assigned to</span></th>
-                                                <th class="text-center"><span>Update Disposition</span></th>
-                                                <th class="text-center"><span>Update Date</span></th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr class="text-center">
-                                                <td><field name="date_assign"/></td>
-                                                <td><field name="user_id"/></td>
-                                                <td><field name="updated_issue"/></td>
-                                                <td><field name="date_last_stage_update"/></td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
+                        <div class="page">
+                            <table class="table table-bordered mt32">
+                                <thead>
+                                    <tr>
+                                        <th class="text-center"><span>Creation Date</span></th>
+                                        <th class="text-center"><span>Assigned to</span></th>
+                                        <th class="text-center"><span>Update Disposition</span></th>
+                                        <th class="text-center"><span>Update Date</span></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr class="text-center">
+                                        <td><field name="date_assign"/></td>
+                                        <td><field name="user_id"/></td>
+                                        <td><field name="updated_issue"/></td>
+                                        <td><field name="date_last_stage_update"/></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
                     </page>
                 </xpath>
+            </field>
+        </record>
+        <record id="project_task_inherit_phases" model="ir.ui.view">
+            <field name="name">project.task.inherit.phases</field>
+            <field name="model">project.task</field>
+            <field name="inherit_id" ref="project.view_task_kanban"/>
+            <field name="arch" type="xml">
+                <templates position="before">
+                    <field name="date_assign" />
+                </templates>
+                <div class="oe_kanban_content" position="after">
+                    <b><field string="Sub-tasks" name="subtask_count" widget="statinfo" attrs="{'invisible' :[('parent_id', '!=', False)]}"/></b>
+                    <div>
+                        <span style="text-color:#808080">Creation Date:</span>
+                        <t t-attf-style="color: red" t-esc="record.date_assign.value and record.date_assign.value.split(' ')[0]"/>
+                    </div>
+                    <!--                    <div>-->
+                    <!--                        <span invisible="context.get('subtask_project_id', False)">Sub-Task Of:</span>-->
+                    <!--                        <t t-value="parent_task_name"/>-->
+                    <!--                    </div>-->
+                </div>
             </field>
         </record>
     </data>
