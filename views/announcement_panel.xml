@@ -112,16 +112,16 @@
                                 <t t-esc="description" />
                                 <a type="action"
                                    data-reload-on-close="true"
-                                   t-att-data-method="method"
+                                   t-att-data-action="'%(project_phases_v13.announcement_action)d'"
                                    t-att-data-model="model"
                                    style="color:white;text-decoration: underline;"
-                                   t-if="announce_title!='No announcements'" >
+                                   t-if="announce_title!='No announcements'">
                                     Read more..
                                 </a>
                             </p>
                         </marquee>
                         <a class="o_onboarding_step_action btn" type="action"
-                           data-reload-on-close="true" role="button" t-att-data-action="%(project_phases_v13.announcement_panel_action)d"
+                           data-reload-on-close="true" role="button" t-att-data-method="method"
                            t-att-data-model="model">
                             <t t-if="btn_text" t-esc="btn_text" />
                             <t t-else="">Create Announcement</t>
@@ -136,7 +136,8 @@
                 <t t-set="title">Announcement</t>
                 <t t-set="description" t-value="announce_title"/>
                 <t t-set="btn_text">Create Announcement</t>
-                <t t-set="action" t-value="'%(project_phases_v13.announcement_panel_action)d'" />
+                <t t-set="action" t-value="'%(project_phases_v13.announcement_action)d'"/>
+                <t t-set="method" t-value="'announcement_action_method'"/>
                 <t t-set="model" t-value="'announcement.panel'" />
             </t>
         </template>
@@ -146,7 +147,7 @@
             <field name="inherit_id" ref="project.edit_project"/>
             <field name="arch" type="xml">
                 <div name="button_box" position="inside">
-                    <button class="oe_stat_button" name="%(project_phases_v13.announcement_action)d" type="edit" icon="fa-bullhorn">
+                    <button class="oe_stat_button" name="%(project_phases_v13.announcement_action)d" type="action" icon="fa-bullhorn">
                         <newline/>
                         <div class="o_stat_info">
                             <span class="o_stat_text">Announcements</span>

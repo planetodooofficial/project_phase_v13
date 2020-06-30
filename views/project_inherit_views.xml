@@ -25,6 +25,9 @@
                             <field name="invite_user" string="Invite User" style="width:200px" widget="many2many_tags"/>
                             <field name="enable_chat" required="1" widget="radio" options="{'horizontal': true}"/>
                         </group>
+                        <group>
+                            <field name="enable_time_tracker" required="1" widget="radio" options="{'horizontal': true}"/>
+                        </group>
                     </group>
                     <group>
                         <group>

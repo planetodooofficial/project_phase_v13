@@ -5,11 +5,19 @@
             <field name="name">announcement.form.data</field>
             <field name="model">announcement.panel</field>
             <field name="arch" type="xml">
-                <form string="Announcements" on_create="project_phases_v13.announcement_panel_action">
+                <form string="Announcements">
                     <group>
-                        <field name = "announce_title"/>
-                        <field name = "announce_description"/>
-                        <field name = "project_id"/>
+                        <group>
+                            <field name = "announce_title" style="width:100px"/>
+                        </group>
+                        <group><field name = "project_id" style="width:100px"/></group>
+                    </group>
+                    <group>
+                        <field name = "announce_description" style="width:575px"/>
+                    </group>
+                    <group>
+                        <group><field name = "announce_start" style="width:100px"/></group>
+                        <group><field name = "announce_end" style="width:100px"/></group>
                     </group>
                 </form>
             </field>
@@ -22,6 +30,8 @@
                     <field name = "announce_title"/>
                     <field name = "announce_description"/>
                     <field name = "project_id"/>
+                    <field name = "announce_start"/>
+                    <field name = "announce_end"/>
                 </tree>
             </field>
         </record>
@@ -30,16 +40,8 @@
             <field name="type">ir.actions.act_window</field>
             <field name="res_model">announcement.panel</field>
             <field name="view_mode">form,tree</field>
-            <field name="view_id" ref="announcement_form" />
             <field name="target">new</field>
         </record>
-        <act_window id="announcement_panel_action"
-                    name="Create Announcement Panel"
-                    binding_model="project.task"
-                    res_model="announcement.panel"
-                    domain="[('project_id','=', active_id)]"
-                    view_mode="form"
-                    target="new"
-        />
+        <menuitem id="announcement_menu" name="Announcements" parent="project.menu_main_pm" action="announcement_action" sequence="13"/>
     </data>
 </odoo>

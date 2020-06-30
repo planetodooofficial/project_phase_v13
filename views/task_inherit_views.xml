@@ -73,10 +73,6 @@
                         <span style="text-color:#808080">Creation Date:</span>
                         <t t-attf-style="color: red" t-esc="record.date_assign.value and record.date_assign.value.split(' ')[0]"/>
                     </div>
-                    <!--                    <div>-->
-                    <!--                        <span invisible="context.get('subtask_project_id', False)">Sub-Task Of:</span>-->
-                    <!--                        <t t-value="parent_task_name"/>-->
-                    <!--                    </div>-->
                 </div>
             </field>
         </record>

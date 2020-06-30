@@ -1,4 +1,4 @@
-from odoo import models, fields
+from odoo import models, fields, api, _
 
 
 class AnnouncementPanel(models.TransientModel):
@@ -7,11 +7,20 @@ class AnnouncementPanel(models.TransientModel):
     announce_title = fields.Char("Title")
     announce_description = fields.Char("Description")
     project_id = fields.Many2one('project.project', 'Project')
+    announce_start = fields.Datetime("Announcement Start Date/Time")
+    announce_end = fields.Datetime("Announcement End Date/Time")
 
-    def announcement_action(self, action_ref=None):
-        if not action_ref:
-            action_ref = 'project_phases_v13.announcement_action'
-        return self.env.ref(action_ref).read()[0]
+    @api.model
+    def announcement_action_method(self):
+        return {
+            'type': 'ir.actions.act_window',
+            'name': _('Announcements'),
+            'res_model': 'announcement.panel',
+            'view_mode': 'form',
+            'target': 'new',
+            'context': {'active_id': self.id},
+            'views': [[False, 'form']]
+        }
 
     def announcement_save(self):
         return {'type': 'ir.actions.act_window_close'}

@@ -28,6 +28,10 @@ class ProjectInherit(models.Model):
         ("yes", "Yes"),
         ("no", "No")
     ], string="Create Chat Channel", default='yes')
+    enable_time_tracker = fields.Selection([
+        ("yes", "Yes"),
+        ("no", "No")
+    ], string="Enable Time Tracking", default='yes')
     announce_count = fields.Integer(string="Announcements")
     attachment_ids = fields.Many2many('ir.attachment', string='Files')
 
