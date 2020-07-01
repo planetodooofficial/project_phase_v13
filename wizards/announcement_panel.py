@@ -5,7 +5,7 @@ class AnnouncementPanel(models.TransientModel):
     _name = "announcement.panel"
 
     announce_title = fields.Char("Title")
-    announce_description = fields.Char("Description")
+    announce_description = fields.Html("Description")
     project_id = fields.Many2one('project.project', 'Project')
     announce_start = fields.Datetime("Announcement Start Date/Time")
     announce_end = fields.Datetime("Announcement End Date/Time")

@@ -13,11 +13,11 @@
                         <group><field name = "project_id" style="width:100px"/></group>
                     </group>
                     <group>
-                        <field name = "announce_description" style="width:575px"/>
-                    </group>
-                    <group>
                         <group><field name = "announce_start" style="width:100px"/></group>
                         <group><field name = "announce_end" style="width:100px"/></group>
+                    </group>
+                    <group>
+                        <field name="announce_description" type="html"/>
                     </group>
                 </form>
             </field>
@@ -28,10 +28,10 @@
             <field name="arch" type="xml">
                 <tree string="Announcements">
                     <field name = "announce_title"/>
-                    <field name = "announce_description"/>
                     <field name = "project_id"/>
                     <field name = "announce_start"/>
                     <field name = "announce_end"/>
+                    <field name="announce_description" type="html"/>
                 </tree>
             </field>
         </record>
