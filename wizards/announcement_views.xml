@@ -39,8 +39,8 @@
             <field name="name">Announcements</field>
             <field name="type">ir.actions.act_window</field>
             <field name="res_model">announcement.panel</field>
-            <field name="view_mode">form,tree</field>
-            <field name="target">new</field>
+            <field name="view_mode">tree,form</field>
+            <field name="target">current</field>
         </record>
         <menuitem id="announcement_menu" name="Announcements" parent="project.menu_main_pm" action="announcement_action" sequence="13"/>
     </data>
