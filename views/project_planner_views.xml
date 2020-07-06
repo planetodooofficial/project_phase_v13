@@ -2,26 +2,23 @@
     <data>
         <record id="view_planner_calendar" model="ir.ui.view">
             <field name="name">project.planner.calendar</field>
-            <field name="model">project.planner</field>
+            <field name="model">project.task</field>
             <field eval="2" name="priority"/>
             <field name="arch" type="xml">
                 <calendar string="Project Planner" date_start="date_deadline"
                           mode="month" event_limit="5"
                           hide_time="true" quick_add="true">
-                    <field name="company_id" invisible="1"/>
-                    <field name="create_plan" string="Type of Event"/>
                     <field name="user_id" avatar_field="image_128"/>
-                    <field name="project_id" attrs="{'invisible': [('create_plan', '!=', 'project')]}"/>
-                    <field name="project_end_date" string="Project End Date" attrs="{'invisible': [('create_plan', '!=', 'project')]}"/>
-                    <field name="parent_id" attrs="{'invisible': [('create_plan', '!=', 'task')]}"/>
-                    <field name="date_deadline" attrs="{'invisible': [('create_plan', '!=', 'task')]}"/>
-                    <field name="calendar_event_id" attrs="{'invisible': [('create_plan', '!=', 'meeting')]}"/>
-                </calendar>
+                    <field name="date_deadline"/>
+                    <field name="project_id"/>
+                    <field name="priority" widget="priority"/>
+                    <field name="stage_id"/>
+                 </calendar>
             </field>
         </record>
         <record id="view_planner_tree" model="ir.ui.view">
             <field name="name">project.planner.tree</field>
-            <field name="model">project.planner</field>
+            <field name="model">project.task</field>
             <field eval="2" name="priority"/>
             <field name="arch" type="xml">
                 <tree string="Project Planner">
@@ -33,9 +30,8 @@
                     <field name="user_id" avatar_field="image_128"/>
                     <field name="date_deadline" invisible="1"/>
                     <field name="project_id"/>
-                    <!--                    <field name="priority" widget="priority"/>-->
                     <field name="stage_id" />
-                    <!--                    <field name="calendar_event_id"/>-->
+                    <field name="calendar_event_id"/>
                     <field name="project_end_date" string="Project End Date"/>
                     <field name="create_plan" string="Type of Event"/>
                 </tree>
@@ -44,8 +40,7 @@
 
         <record id="view_planner_form" model="ir.ui.view">
             <field name="name">project.planner.form</field>
-            <field name="model">project.planner</field>
-            <field eval="2" name="priority"/>
+            <field name="model">project.task</field>
             <field name="arch" type="xml">
                 <form string="Project Planner">
                     <sheet>
@@ -71,7 +66,7 @@
 
         <record id="project_planner_search_form" model="ir.ui.view">
             <field name="name">project.planner.search.form</field>
-            <field name="model">project.planner</field>
+            <field name="model">project.task</field>
             <field name="arch" type="xml">
                 <search string="Project">
                     <!--                    <field name="user_id"/>-->
@@ -89,10 +84,10 @@
 
         <record id="action_project_planner" model="ir.actions.act_window">
             <field name="name">Project Planning</field>
-            <field name="res_model">project.planner</field>
+            <field name="res_model">project.task</field>
             <field name="type">ir.actions.act_window</field>
             <field name="search_view_id" ref="project_phases_v13.project_planner_search_form"/>
-            <field name="view_mode">calendar,tree,form</field>
+            <field name="view_mode">form,calendar</field>
         </record>
         <menuitem id="project_planner_menu" name="Project Planner" parent="project.menu_main_pm" action="action_project_planner" sequence="12"/>
     </data>

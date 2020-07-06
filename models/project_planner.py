@@ -2,7 +2,6 @@ from odoo import fields, models, tools
 
 
 class CalenderPlanner(models.Model):
-    _name = "project.planner"
     _inherit = "project.task"
     _order = 'name desc, project_id'
     _auto = False
