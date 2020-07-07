@@ -177,17 +177,31 @@ class ProjectInherit(models.Model):
             self.env["project.task.type"].create({'name': "Closing", 'project_ids': [(6, 0, self.ids)]})
         if self.enable_chat == 'yes':
             channel_obj = self.env["mail.channel"]
-            channel_obj.create({
+            channel_obj.sudo().create({
                 'name': self.name,
             })
-            message_user = []
+
             channel_obj1 = channel_obj.search([('name', '=', self.name)])
             for res in self.invite_user:
-                channel_obj2 = channel_obj1.write({
+                channel_obj2 = channel_obj1.sudo().write({
                     'channel_last_seen_partner_ids': [(0, 0, {'partner_id': res.partner_id.id})]
+
                 })
                 message = _("%s has been added to the channel</br>") % res.partner_id.name
                 channel_obj1.sudo().message_post(body=message, message_type="comment", subtype="mail.mt_comment")
             self.channel_id = channel_obj1.id
+            self.message_pop()
 
         return super(ProjectInherit, self).open_tasks()
+
+    def message_pop(self):
+        message_id = self.env['message.wizard'].create({'message': _("Invitation is successfully sent")})
+        return {
+            'name': _('Successful'),
+            'type': 'ir.actions.act_window',
+            'view_mode': 'form',
+            'res_model': 'message.wizard',
+            # pass the id
+            'res_id': message_id.id,
+            'target': 'new'
+        }

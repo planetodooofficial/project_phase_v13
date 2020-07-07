@@ -3,8 +3,6 @@ from odoo import fields, models, tools
 
 class CalenderPlanner(models.Model):
     _inherit = "project.task"
-    _order = 'name desc, project_id'
-    _auto = False
 
     project_id = fields.Many2one('project.project', string='Project',
                                  default=lambda self: self.env.context.get('default_project_id'))
@@ -16,3 +14,5 @@ class CalenderPlanner(models.Model):
         ('project', 'Project')
     ], string="Type of Event")
     calendar_event_id = fields.Many2one('calendar.event', string="Calendar Meeting")
+    date_test = fields.Date("Date", compute="_compute_date")
+

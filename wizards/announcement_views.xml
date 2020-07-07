@@ -13,8 +13,24 @@
                         <group><field name = "project_id" style="width:100px"/></group>
                     </group>
                     <group>
-                        <group><field name = "announce_start" style="width:100px"/></group>
-                        <group><field name = "announce_end" style="width:100px"/></group>
+                        <group>
+                            <group>
+                                <field name = "announce_start" style="width:100px"/>
+                            </group>
+                            <group>
+                                <field name="announce_start_time" widget="float_time" style="width:100px" />
+                                <field name="time_indicator" style="width:100px" string=""/>
+                            </group>
+                        </group>
+                        <group>
+                            <group>
+                                <field name = "announce_end" style="width:100px" />
+                            </group>
+                            <group>
+                                <field name="announce_end_time" widget="float_time" style="width:100px"/>
+                                <field name="time_indicator" style="width:100px" string=""/>
+                            </group>
+                        </group>
                     </group>
                     <group>
                         <field name="announce_description" type="html"/>

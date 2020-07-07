@@ -7,8 +7,21 @@ class AnnouncementPanel(models.TransientModel):
     announce_title = fields.Char("Title")
     announce_description = fields.Html("Description")
     project_id = fields.Many2one('project.project', 'Project')
-    announce_start = fields.Datetime("Announcement Start Date/Time")
-    announce_end = fields.Datetime("Announcement End Date/Time")
+    announce_start = fields.Date("Announcement Start Date")
+    announce_end = fields.Date("Announcement End Date")
+    announce_start_time = fields.Float(default=10.0, string='Announcement Start Time')
+    announce_end_time = fields.Float(default=10.0, string='Announcement End Time')
+    time_indicator = fields.Selection([
+        ('am', 'AM'),
+        ('pm', 'PM')], default='am', required=True, string="")
+    _sql_constraints = [
+        ('announce_time_range',
+         'CHECK(announce_start_time >= 0 and announce_start_time <= 12)',
+         'Announcement time must be between 0 and 12'),
+        ('end_announce_time_range',
+         'CHECK(announce_end_time >= 0 and announce_end_time <= 12)',
+         'Announcement time must be between 0 and 12')
+    ]
 
     @api.model
     def announcement_action_method(self):
