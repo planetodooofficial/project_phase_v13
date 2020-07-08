@@ -190,18 +190,4 @@ class ProjectInherit(models.Model):
                 message = _("%s has been added to the channel</br>") % res.partner_id.name
                 channel_obj1.sudo().message_post(body=message, message_type="comment", subtype="mail.mt_comment")
             self.channel_id = channel_obj1.id
-            self.message_pop()
-
         return super(ProjectInherit, self).open_tasks()
-
-    def message_pop(self):
-        message_id = self.env['message.wizard'].create({'message': _("Invitation is successfully sent")})
-        return {
-            'name': _('Successful'),
-            'type': 'ir.actions.act_window',
-            'view_mode': 'form',
-            'res_model': 'message.wizard',
-            # pass the id
-            'res_id': message_id.id,
-            'target': 'new'
-        }
