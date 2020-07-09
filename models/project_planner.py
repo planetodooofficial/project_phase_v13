@@ -14,9 +14,4 @@ class CalendarPlanner(models.Model):
         ('project', 'Project')
     ], string="Type of Event")
 
-    def create_event(self):
-        calendar_event = self.env['calendar.event'].create({
-            'name': self.project_name,
-            'start': self.project_start_date,
-            'stop': self.project_end_date,
-        })
+

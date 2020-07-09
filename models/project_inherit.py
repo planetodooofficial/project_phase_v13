@@ -5,6 +5,7 @@ from odoo.exceptions import UserError
 class ProjectInherit(models.Model):
     _inherit = "project.project"
 
+    project_id = fields.Many2one('project.project', string='Project')
     company_id = fields.Many2one('res.company', string='Company', required=True, default=lambda self: self.env.company)
     partner_id = fields.Many2one('res.partner', string='Client', auto_join=True, tracking=True)
     project_description = fields.Char("Description")
@@ -62,6 +63,22 @@ class ProjectInherit(models.Model):
         else:
             self.total_custom_price = 0
         return
+
+    def create_event(self):
+        calendar_event = self.env['calendar.event'].create({
+            'name': self.name,
+            'start': self.project_start_date,
+            'stop': self.project_end_date,
+            'project_id': self.id
+        })
+        tasks = self.env['project.task'].search([('project_id', 'in', self.ids)])
+        for rec in tasks:
+            calendar_event = self.env['calendar.event'].create({
+                'name': rec.name,
+                'start': rec.date_deadline,
+                'stop': rec.date_deadline,
+                'project_id': self.id
+            })
 
     def action_project_view(self):
         action = self.env.ref('project_phases_v13.view_project_phase').read()[0]
