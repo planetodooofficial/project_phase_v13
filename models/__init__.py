@@ -4,3 +4,4 @@ from . import project_inherit
 from . import project_stages
 from . import task_inherit
 from . import project_planner
+from . import milestone_project

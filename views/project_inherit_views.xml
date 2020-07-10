@@ -106,6 +106,7 @@
                 </xpath>
             </field>
         </record>
+<!--        Create calendar events for project-->
         <record id="create_event_button" model="ir.ui.view">
             <field name="name">project.project.create.event.inherited</field>
             <field name="model">project.project</field>
@@ -116,5 +117,8 @@
                 </xpath>
             </field>
         </record>
+        <menuitem id="milestone_menu" name="Project Milestone" parent="project.menu_main_pm"
+                  action="milestone_action"
+                  sequence="13"/>
     </data>
 </odoo>

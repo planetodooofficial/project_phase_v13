@@ -77,22 +77,13 @@ class ProjectInherit(models.Model):
                 'name': rec.name,
                 'start': rec.date_deadline,
                 'stop': rec.date_deadline,
-                'project_id': self.id
+                'project_id': self.id,
+                'allday': 1,
+                'description': 'Task Deadline'
             })
 
-    def action_project_view(self):
-        action = self.env.ref('project_phases_v13.view_project_phase').read()[0]
-        action['params'] = {
-            'project_ids': self.ids,
-        }
-        action['context'] = {
-            'active_id': self.id,
-            'active_ids': self.ids,
-            'search_default_name': self.name,
-        }
-        return action
-
     def open_tasks(self):
+        # Function for creation of tasks based on the project methodolofy selected
         active_id = self.env["project.dashboard"].browse(self.env.context.get('active_ids'))
         self.methodology = dict(active_id._fields['method_name'].selection).get(active_id.method_name)
         if active_id.method_name == 'agile':
@@ -192,6 +183,7 @@ class ProjectInherit(models.Model):
                 {'name': "Managing stage boundaries", 'project_ids': [(6, 0, self.ids)],
                  'method_name': dict(active_id._fields['method_name'].selection).get(active_id.method_name)})
             self.env["project.task.type"].create({'name': "Closing", 'project_ids': [(6, 0, self.ids)]})
+        # Creation of Chat channel if user enables it from the project form
         if self.enable_chat == 'yes':
             channel_obj = self.env["mail.channel"]
             channel_obj.sudo().create({

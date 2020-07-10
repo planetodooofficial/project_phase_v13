@@ -4,7 +4,7 @@ from odoo import models, fields, api, _
 class AnnouncementPanel(models.TransientModel):
     _name = "announcement.panel"
 
-    announce_title = fields.Char("Title")
+    announce_title = fields.Char("Title", required=True)
     announce_description = fields.Html("Description")
     project_id = fields.Many2one('project.project', 'Project')
     announce_start = fields.Date("Announcement Start Date")
