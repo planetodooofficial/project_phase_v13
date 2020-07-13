@@ -115,7 +115,7 @@
                                    t-att-data-action="'%(project_phases_v13.announcement_action)d'"
                                    t-att-data-model="model"
                                    style="color:white;text-decoration: underline;"
-                                   t-if="announce_title!='No announcements'">
+                                   t-if="name!='No announcements'">
                                     Read more..
                                 </a>
                             </p>
@@ -134,7 +134,7 @@
         <template id="onboarding_company_step">
             <t t-call="project_phases_v13.onboarding_step">
                 <t t-set="title">Announcement</t>
-                <t t-set="description" t-value="announce_title"/>
+                <t t-set="description" t-value="name"/>
                 <t t-set="btn_text">Create Announcement</t>
                 <t t-set="action" t-value="'%(project_phases_v13.announcement_action)d'"/>
                 <t t-set="method" t-value="'announcement_action_method'"/>

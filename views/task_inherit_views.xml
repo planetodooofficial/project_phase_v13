@@ -21,8 +21,8 @@
                         <field name="parent_id" invisible="1"/>
                         <b>
                             <span attrs="{'invisible' : ['|',('subtask_count', '>', 0),('parent_id', '=', False)]}">Sub-task Of:
-                            <field name="parent_task_name"/>
-                        </span>
+                                <field name="parent_task_name"/>
+                            </span>
                         </b>
                     </div>
                 </xpath>
@@ -57,6 +57,9 @@
                         </div>
                     </page>
                 </xpath>
+                <xpath expr="//field[@name='tag_ids']" position="after">
+                    <field name="milestone_id" domain="[('project_id', '=', project_id)]"/>
+                </xpath>
             </field>
         </record>
         <record id="project_task_inherit_phases" model="ir.ui.view">
@@ -74,6 +77,16 @@
                         <t t-attf-style="color: red" t-esc="record.date_assign.value and record.date_assign.value.split(' ')[0]"/>
                     </div>
                 </div>
+            </field>
+        </record>
+        <record id="view_task_project_user_pivot_inherit" model="ir.ui.view">
+            <field name="name">report.project.task.user.pivot.inherit</field>
+            <field name="model">report.project.task.user</field>
+            <field name="inherit_id" ref="project.view_task_project_user_pivot" />
+            <field name="arch" type="xml">
+               <xpath expr="//field[@name='project_id']">
+                    <field name="milestone_id"/>
+                </xpath>
             </field>
         </record>
     </data>

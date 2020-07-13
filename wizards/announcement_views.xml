@@ -9,7 +9,7 @@
                     <sheet>
                     <group>
                         <group>
-                            <field name = "announce_title" style="width:100px" required="1"/>
+                            <field name = "name" style="width:100px" required="1"/>
                         </group>
                         <group><field name = "project_id" style="width:100px"/></group>
                     </group>
@@ -45,7 +45,7 @@
             <field name="model">announcement.panel</field>
             <field name="arch" type="xml">
                 <tree string="Announcements">
-                    <field name = "announce_title"/>
+                    <field name = "name"/>
                     <field name = "project_id"/>
                     <field name = "announce_start"/>
                     <field name = "announce_end"/>

@@ -1,6 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
     <data>
+        <record id="act_select_task" model="ir.actions.act_window">
+            <field name="name">Tasks</field>
+            <field name="res_model">project.task</field>
+            <field name="view_mode">kanban,tree,form,calendar,pivot,graph,activity</field>
+            <field name="domain">[
+                ('project_id','=', active_id)
+                ]</field>
+            <field name="context">{
+                'pivot_row_groupby': ['user_id'],
+                'search_default_project_id': [active_id],
+                'default_project_id': active_id,
+                }</field>
+            <field name="search_view_id" ref="project.view_task_search_form"/>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    Click <i>Create</i> to start a new task.
+                </p><p>
+                To get things done, use activities and status on tasks.<br/>
+                Chat in real time or by email to collaborate efficiently.
+            </p>
+            </field>
+        </record>
+
         <record id="milestone_form" model="ir.ui.view">
             <field name="name">milestone.form.data</field>
             <field name="model">milestone.project</field>
@@ -9,19 +32,17 @@
                     <sheet string="Project Milestone">
                         <div class="oe_button_box" name="button_box">
                             <button class="oe_stat_button" type="action"
-                                    name="%(project.act_project_project_2_project_task_all)d" icon="fa-tasks">
+                                    name="%(act_select_task)d" icon="fa-tasks">
                                 <field string="Tasks" name="task_count" widget="statinfo" options="{'label_field': 'label_tasks'}"/>
                             </button>
                         </div>
-                        <group>
-                            <group>
-                                <field name = "title" style="width:100px"/>
-                            </group>
+                        <h1>
+                            <field name="name" placeholder="Milestone Name"/>
+                        </h1>
                             <group>
                                 <field name="project_id" domain="[('active', '=', True)]"/>
                                 <field name="active" invisible="1"/>
                             </group>
-                        </group>
                         <group>
                             <group>
                                 <field name = "milestone_start_date" style="width:100px"/>
@@ -41,12 +62,12 @@
             <field name="model">milestone.project</field>
             <field name="arch" type="xml">
                 <tree string="Project Milestone">
-                    <field name = "title"/>
+                    <field name = "name"/>
                     <field name = "project_id"/>
                     <field name = "milestone_start_date"/>
                     <field name = "milestone_end_date"/>
-                    <field name="duration"/>
-                    <field name="days_remaining"/>
+                    <field name="duration" domain="[('project_id', '=', project_id)]"/>
+                    <field name="days_remaining" domain="[('project_id', '=', project_id)]"/>
                 </tree>
             </field>
         </record>
@@ -60,10 +81,9 @@
         <record id="milestone_action2" model="ir.actions.act_window">
             <field name="name">Project Milestones</field>
             <field name="res_model">milestone.project</field>
-            <field name="context">{
-                'search_default_project_id': [active_id],
-                'default_project_id': active_id,
-                }</field>
+            <field name="domain">[
+                ('project_id','=', active_id)
+                ]</field>
             <field name="type">ir.actions.act_window</field>
             <field name="view_mode">tree,form</field>
         </record>
@@ -74,11 +94,9 @@
             <field name="inherit_id" ref="project.edit_project"/>
             <field name="arch" type="xml">
                 <div name="button_box" position="inside">
-                    <button class="oe_stat_button" name="%(project_phases_v13.milestone_action2)d" type="action" icon="fa-flag">
-                        <newline/>
-                        <div class="o_stat_info">
-                            <span class="o_stat_text">Milestones</span>
-                        </div>
+                    <button class="oe_stat_button" type="action"
+                            name="%(project_phases_v13.milestone_action2)d" icon="fa-flag">
+                        <field string="Milestones" name="milestone_count" widget="statinfo"/>
                     </button>
                 </div>
             </field>

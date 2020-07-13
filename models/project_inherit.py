@@ -35,6 +35,11 @@ class ProjectInherit(models.Model):
     ], string="Enable Time Tracking", default='yes')
     announce_count = fields.Integer(string="Announcements")
     attachment_ids = fields.Many2many('ir.attachment', string='Files')
+    milestone_count = fields.Integer(compute='_compute_milestone_count', string='Milestones')
+
+    def _compute_milestone_count(self):
+        has_milestone = self.env['milestone.project'].search_count([('project_id', 'in', self.ids)])
+        self.milestone_count = has_milestone
 
     @api.model
     def create(self, vals):
@@ -66,11 +71,11 @@ class ProjectInherit(models.Model):
 
     def create_event(self):
         calendar_event = self.env['calendar.event'].create({
-            'name': self.name,
-            'start': self.project_start_date,
-            'stop': self.project_end_date,
-            'project_id': self.id
-        })
+                'name': self.name,
+                'start': self.project_start_date,
+                'stop': self.project_end_date,
+                'project_id': self.id
+            })
         tasks = self.env['project.task'].search([('project_id', 'in', self.ids)])
         for rec in tasks:
             calendar_event = self.env['calendar.event'].create({
@@ -81,6 +86,17 @@ class ProjectInherit(models.Model):
                 'allday': 1,
                 'description': 'Task Deadline'
             })
+        milestone = self.env['milestone.project'].search([('project_id', 'in', self.ids)])
+        for rec in milestone:
+            calendar_event = self.env['calendar.event'].create({
+                'name': rec.name,
+                'start': rec.milestone_start_date,
+                'stop': rec.milestone_end_date,
+                'project_id': self.id,
+                'allday': 1,
+                'description': 'Project Milestone'
+            })
+
 
     def open_tasks(self):
         # Function for creation of tasks based on the project methodolofy selected

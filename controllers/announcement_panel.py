@@ -12,12 +12,12 @@ class AnnouncementPanel(http.Controller):
             return {
                 'html':
                     request.env.ref('project_phases_v13.announcement_panel_template').render(
-                        {'announce_title': 'No announcements'}
+                        {'name': 'No announcements'}
             )}
         for ann in announce:
             announcements = {
                 'html': request.env.ref('project_phases_v13.announcement_panel_template').render({
-                    'announce_title': ann.announce_title
+                    'name': ann.name
                 })
             }
         return announcements
