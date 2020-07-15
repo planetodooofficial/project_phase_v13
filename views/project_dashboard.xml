@@ -119,7 +119,6 @@
                 </xpath>
             </field>
         </record>
-
         <record id="action_project_dashboard" model="ir.actions.act_window">
             <field name="name">Project Methodology</field>
             <field name="res_model">project.dashboard</field>
