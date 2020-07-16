@@ -24,6 +24,11 @@ class AnnouncementPanel(models.TransientModel):
     ]
 
     @api.model
+    def delete_announcement(self):
+        announce = self.search([('announce_end', '<', fields.Date.today())])
+        return announce.unlink()
+
+    @api.model
     def announcement_action_method(self):
         return {
             'type': 'ir.actions.act_window',

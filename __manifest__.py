@@ -11,6 +11,7 @@
         'data/project_dashboard.xml',
         'data/chat_message.xml',
         'data/mail_project.xml',
+        'data/delete_announcements.xml',
         'security/project_user_acess.xml',
         'security/ir.model.access.csv',
         'views/res_partner_inherit_views.xml',
