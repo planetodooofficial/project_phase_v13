@@ -39,10 +39,10 @@
                         <h1>
                             <field name="name" placeholder="Milestone Name"/>
                         </h1>
-                            <group>
-                                <field name="project_id" domain="[('active', '=', True)]"/>
-                                <field name="active" invisible="1"/>
-                            </group>
+                        <group>
+                            <field name="project_id" domain="[('active', '=', True)]"/>
+                            <field name="active" invisible="1"/>
+                        </group>
                         <group>
                             <group>
                                 <field name = "milestone_start_date" style="width:100px"/>
@@ -57,6 +57,16 @@
                 </form>
             </field>
         </record>
+        <record id="milestone_view_search" model="ir.ui.view">
+            <field name="name">milestone.project.search</field>
+            <field name="model">milestone.project</field>
+            <field name="arch" type="xml">
+                <search>
+                    <filter string="Expiry" name="od_imm" domain="[('milestone_end_date','&gt;=', ((context_today()+datetime.timedelta(days=1)).strftime('%Y-%m-%d'))),('expiry_date','&lt;=', ((context_today()+datetime.timedelta(days=45)).strftime('%Y-%m-%d')))]"/>
+                </search>
+            </field>
+        </record>
+
         <record id="milestone_tree" model="ir.ui.view">
             <field name="name">milestone.tree.data</field>
             <field name="model">milestone.project</field>
@@ -76,6 +86,7 @@
             <field name="res_model">milestone.project</field>
             <field name="type">ir.actions.act_window</field>
             <field name="view_mode">tree,form</field>
+            <field name="search_view_id" ref="milestone_view_search"/>
         </record>
 
         <record id="milestone_action2" model="ir.actions.act_window">
@@ -86,6 +97,7 @@
                 ]</field>
             <field name="type">ir.actions.act_window</field>
             <field name="view_mode">tree,form</field>
+            <field name="search_view_id" ref="milestone_view_search"/>
         </record>
         <menuitem id="milestone_menu" name="Project Milestone" parent="project.menu_project_config" action="milestone_action" sequence="13"/>
         <record id="milestones_project_inherit" model="ir.ui.view">
@@ -95,7 +107,7 @@
             <field name="arch" type="xml">
                 <div name="button_box" position="inside">
                     <button class="oe_stat_button" type="action"
-                            name="%(project_phases_v13.milestone_action2)d" icon="fa-flag">
+                            name="%(project_phase_v13.milestone_action2)d" icon="fa-flag">
                         <field string="Milestones" name="milestone_count" widget="statinfo"/>
                     </button>
                 </div>

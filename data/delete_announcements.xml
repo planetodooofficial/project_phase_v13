@@ -4,7 +4,7 @@
 
         <record id="ir_cron_announcement" model="ir.cron">
             <field name="name">Delete Old Announcements</field>
-            <field name="model_id" ref="project_phases_v13.model_announcement_panel"/>
+            <field name="model_id" ref="project_phase_v13.model_announcement_panel"/>
             <field name="state">code</field>
             <field name="code">model.delete_announcement()</field>
             <field name="interval_type">days</field>

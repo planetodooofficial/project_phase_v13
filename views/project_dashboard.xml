@@ -15,12 +15,12 @@
                                         <center><div><field name="method_name" attrs="{'invisible': [('method_name', '!=', 'kanban'),('method_name', '!=', 'prince'),('method_name', '!=', 'blank')]}" /></div></center>
                                         <a name="%(project.open_create_project)d" type="action">
                                             <center>
-                                                <img alt="Agile" width="100%" height="100%" src="/project_phases_v13/static/src/img/agile.jpg" attrs="{'invisible': [('method_name', '!=', 'agile')]}"/>
-                                                <img alt="Waterfall" width="100%" height="100%" src="/project_phases_v13/static/src/img/waterfall.jpg" attrs="{'invisible': [('method_name', '!=', 'waterfall')]}"/>
-                                                <img alt="PRINCE2" width="100%" height="100%" src="/project_phases_v13/static/src/img/prince2.png" attrs="{'invisible': [('method_name', '!=', 'prince')]}"/>
-                                                <img alt="Kanban" width="100%" height="100%" src="/project_phases_v13/static/src/img/kanban.png" attrs="{'invisible': [('method_name', '!=', 'kanban')]}"/>
-                                                <img alt="SCRUM" width="100%" height="100%" src="/project_phases_v13/static/src/img/scrum.jpg" attrs="{'invisible': [('method_name', '!=', 'scrum')]}"/>
-                                                <img alt="Custom" width="100%" height="100%" src="/project_phases_v13/static/src/img/blank.jpg" attrs="{'invisible': [('method_name', '!=', 'blank')]}"/>
+                                                <img alt="Agile" width="100%" height="100%" src="/project_phase_v13/static/src/img/agile.jpg" attrs="{'invisible': [('method_name', '!=', 'agile')]}"/>
+                                                <img alt="Waterfall" width="100%" height="100%" src="/project_phase_v13/static/src/img/waterfall.jpg" attrs="{'invisible': [('method_name', '!=', 'waterfall')]}"/>
+                                                <img alt="PRINCE2" width="100%" height="100%" src="/project_phase_v13/static/src/img/prince2.png" attrs="{'invisible': [('method_name', '!=', 'prince')]}"/>
+                                                <img alt="Kanban" width="100%" height="100%" src="/project_phase_v13/static/src/img/kanban.png" attrs="{'invisible': [('method_name', '!=', 'kanban')]}"/>
+                                                <img alt="SCRUM" width="100%" height="100%" src="/project_phase_v13/static/src/img/scrum.jpg" attrs="{'invisible': [('method_name', '!=', 'scrum')]}"/>
+                                                <img alt="Custom" width="100%" height="100%" src="/project_phase_v13/static/src/img/blank.jpg" attrs="{'invisible': [('method_name', '!=', 'blank')]}"/>
                                             </center>
                                         </a>
                                     </div>
@@ -37,7 +37,7 @@
             <field name="inherit_id" ref="project.view_project_kanban"/>
             <field name="arch" type="xml">
                 <xpath expr="//kanban[@class='oe_background_grey o_kanban_dashboard o_project_kanban o_emphasize_colors']" position="replace">
-                <kanban class="oe_background_grey o_kanban_dashboard o_project_kanban o_emphasize_colors" on_create="project_phases_v13.action_project_dashboard">
+                <kanban class="oe_background_grey o_kanban_dashboard o_project_kanban o_emphasize_colors" on_create="project_phase_v13.action_project_dashboard">
                     <field name="name"/>
                     <field name="partner_id"/>
                     <field name="color"/>

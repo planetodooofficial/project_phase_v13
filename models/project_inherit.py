@@ -9,11 +9,11 @@ class ProjectInherit(models.Model):
     company_id = fields.Many2one('res.company', string='Company', required=True, default=lambda self: self.env.company)
     partner_id = fields.Many2one('res.partner', string='Client', auto_join=True, tracking=True)
     project_description = fields.Char("Description")
-    invite_user = fields.Many2many("res.users", string="Invite User")
     project_start_date = fields.Date("Project Start Date")
     project_end_date = fields.Date("Project End Date")
     notification_date = fields.Date("Notification Date")
     currency_id = fields.Many2one('res.currency', string="Currency")
+    invite_user = fields.Many2many("res.users", string="Invite user")
     project_budget = fields.Selection([("fixed", "Fixed Budget"),
                                        ("weekly", "Weekly Budget"),
                                        ("custom", "Custom Budget")])
@@ -98,7 +98,7 @@ class ProjectInherit(models.Model):
             })
 
     def open_tasks(self):
-        # Function for creation of tasks based on the project methodolofy selected
+        # Function for creation of tasks based on the project methodology selected
         active_id = self.env["project.dashboard"].browse(self.env.context.get('active_ids'))
         self.methodology = dict(active_id._fields['method_name'].selection).get(active_id.method_name)
         if active_id.method_name == 'agile':
