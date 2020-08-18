@@ -137,10 +137,10 @@ class GitRepository(models.Model):
 
     @api.depends('odoo_uuid', 'type')
     def _compute_webhook_url(self):
-        # base_url = self.env['ir.config_parameter'] \
-        #     .sudo() \
-        #     .get_param('web.base.url')
-        base_url = "http://99bc323e5a37.ngrok.io"
+        base_url = self.env['ir.config_parameter'] \
+            .sudo() \
+            .get_param('web.base.url')
+        # base_url = "http://99bc323e5a37.ngrok.io"
         for record in self:
             if record.type:
                 record.webhook_url = urljoin(
