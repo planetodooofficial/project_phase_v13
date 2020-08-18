@@ -7,7 +7,7 @@
             <field name="inherit_id" ref="project.view_task_form2"/>
             <field name="arch" type="xml">
                 <xpath expr="//form" position="attributes">
-                    <attribute name="banner_route">/project_phase_v13/announcements</attribute>
+                    <attribute name="banner_route">/project_phases_v13/announcements</attribute>
                 </xpath>
             </field>
         </record>
@@ -17,7 +17,7 @@
             <field name="inherit_id" ref="project.view_task_tree2"/>
             <field name="arch" type="xml">
                 <xpath expr="//tree" position="attributes">
-                    <attribute name="banner_route">/project_phase_v13/announcements</attribute>
+                    <attribute name="banner_route">/project_phases_v13/announcements</attribute>
                 </xpath>
             </field>
         </record>
@@ -27,17 +27,17 @@
             <field name="inherit_id" ref="project.view_task_kanban"/>
             <field name="arch" type="xml">
                 <xpath expr="//kanban" position="attributes">
-                    <attribute name="banner_route">/project_phase_v13/announcements</attribute>
+                    <attribute name="banner_route">/project_phases_v13/announcements</attribute>
                 </xpath>
             </field>
         </record>
-        <template id="announcement_panel_template" name="project_phase_v13.announcement.panel">
-            <t t-call="project_phase_v13.onboarding_container">
+        <template id="announcement_panel_template" name="project_phases_v13.announcement.panel">
+            <t t-call="project_phases_v13.onboarding_container">
                 <t t-set="classes" t-value="'o_onboarding_blue'"/>
                 <t t-set="bg_image" t-value="'/account/static/src/img/account_invoice_onboarding_bg.jpg'"/>
                 <t t-set="close_model" t-value="'announcement.panel'"/>
                 <t t-set="text_completed">Announcement Created.</t>
-                <t t-call="project_phase_v13.onboarding_company_step" name="announce_create_panel" />
+                <t t-call="project_phases_v13.onboarding_company_step" name="announce_create_panel" />
             </t>
         </template>
         <template id="onboarding_container">
@@ -112,7 +112,7 @@
                                 <t t-esc="description" />
                                 <a type="action"
                                    data-reload-on-close="true"
-                                   t-att-data-action="'%(project_phase_v13.announcement_action)d'"
+                                   t-att-data-action="'%(project_phases_v13.announcement_action)d'"
                                    t-att-data-model="model"
                                    style="color:white;text-decoration: underline;"
                                    t-if="name!='No announcements'">
@@ -132,11 +132,11 @@
 
         </template>
         <template id="onboarding_company_step">
-            <t t-call="project_phase_v13.onboarding_step">
+            <t t-call="project_phases_v13.onboarding_step">
                 <t t-set="title">Announcement</t>
                 <t t-set="description" t-value="name"/>
                 <t t-set="btn_text">Create Announcement</t>
-                <t t-set="action" t-value="'%(project_phase_v13.announcement_action)d'"/>
+                <t t-set="action" t-value="'%(project_phases_v13.announcement_action)d'"/>
                 <t t-set="method" t-value="'announcement_action_method'"/>
                 <t t-set="model" t-value="'announcement.panel'" />
             </t>
@@ -147,7 +147,7 @@
             <field name="inherit_id" ref="project.edit_project"/>
             <field name="arch" type="xml">
                 <div name="button_box" position="inside">
-                    <button class="oe_stat_button" name="%(project_phase_v13.announcement_action)d" type="action" icon="fa-bullhorn">
+                    <button class="oe_stat_button" name="%(project_phases_v13.announcement_action)d" type="action" icon="fa-bullhorn">
                         <newline/>
                         <div class="o_stat_info">
                             <span class="o_stat_text">Announcements</span>
