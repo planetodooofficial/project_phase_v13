@@ -33,8 +33,8 @@ class GithubRepository(models.Model):
     def _compute_url_token(self):
         db_secret = self.env['ir.config_parameter'].sudo().get_param('database.secret')
         db_uuid = self.env['ir.config_parameter'].sudo().get_param('database.uuid')
-        # baseurl = self.env['ir.config_parameter'].get_param('web.base.url')
-        baseurl = "http://f97d01c7ac16.ngrok.io"
+        baseurl = self.env['ir.config_parameter'].get_param('web.base.url')
+        # baseurl = "http://f97d01c7ac16.ngrok.io"
 
         for repository in self:
             repository.url_token = baseurl + "/mail_github/payload/" + github_tokenize(db_secret, db_uuid)
