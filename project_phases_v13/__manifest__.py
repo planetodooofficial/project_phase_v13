@@ -15,7 +15,6 @@
         'security/project_user_acess.xml',
         'security/ir.model.access.csv',
         'views/res_partner_inherit_views.xml',
-        'wizards/message_view.xml',
         'views/project_dashboard.xml',
         'views/milestone_view.xml',
         'views/project_inherit_views.xml',

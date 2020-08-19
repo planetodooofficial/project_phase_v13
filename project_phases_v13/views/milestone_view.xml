@@ -1,12 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
     <data>
+        <record id="milestone_tree" model="ir.ui.view">
+            <field name="name">milestone.tree.data</field>
+            <field name="model">milestone.project</field>
+            <field name="arch" type="xml">
+                <tree string="Project Milestone">
+                    <field name = "name"/>
+                    <field name = "project_id"/>
+                    <field name = "milestone_start_date"/>
+                    <field name = "milestone_end_date"/>
+                    <field name="duration" domain="[('project_id', '=', project_id)]"/>
+                    <field name="days_remaining" domain="[('project_id', '=', project_id)]"/>
+                </tree>
+            </field>
+        </record>
         <record id="act_select_task" model="ir.actions.act_window">
             <field name="name">Tasks</field>
             <field name="res_model">project.task</field>
             <field name="view_mode">kanban,tree,form,calendar,pivot,graph,activity</field>
             <field name="domain">[
-                ('project_id','=', active_id)
+                ('milestone_id','=', active_id)
                 ]</field>
             <field name="context">{
                 'pivot_row_groupby': ['user_id'],
@@ -64,21 +78,6 @@
                 <search>
                     <filter string="Expiry" name="od_imm" domain="[('milestone_end_date','&gt;=', ((context_today()+datetime.timedelta(days=1)).strftime('%Y-%m-%d'))),('expiry_date','&lt;=', ((context_today()+datetime.timedelta(days=45)).strftime('%Y-%m-%d')))]"/>
                 </search>
-            </field>
-        </record>
-
-        <record id="milestone_tree" model="ir.ui.view">
-            <field name="name">milestone.tree.data</field>
-            <field name="model">milestone.project</field>
-            <field name="arch" type="xml">
-                <tree string="Project Milestone">
-                    <field name = "name"/>
-                    <field name = "project_id"/>
-                    <field name = "milestone_start_date"/>
-                    <field name = "milestone_end_date"/>
-                    <field name="duration" domain="[('project_id', '=', project_id)]"/>
-                    <field name="days_remaining" domain="[('project_id', '=', project_id)]"/>
-                </tree>
             </field>
         </record>
         <record id="milestone_action" model="ir.actions.act_window">

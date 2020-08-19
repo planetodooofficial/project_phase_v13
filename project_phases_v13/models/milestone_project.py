@@ -37,8 +37,10 @@ class MilestoneProject(models.Model):
 
     def _compute_task_count(self):
         projects = self.env['project.project'].search([('name', '=', self.project_id.name)])
-        has_tasks = self.env['project.task'].search_count([('project_id', 'in', projects.ids)])
-        self.task_count = has_tasks
+        milestones = self.env['milestone.project'].search([('project_id', 'in', projects.ids)])
+        for task in milestones:
+            has_tasks = self.env['project.task'].search_count([('milestone_id', 'in', task.ids)])
+            task.task_count = has_tasks
 
     def _compute_milestone_count(self):
         projects = self.env['project.project'].search([('name', '=', self.project_id.name)])

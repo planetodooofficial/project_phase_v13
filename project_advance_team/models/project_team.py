@@ -125,10 +125,6 @@ class ProjectProject(models.Model):
         new_members = self._get_many2many_track_visibility_names(self.members)
         new_teams = self._get_many2many_track_visibility_names(
             self.wk_extra_team_ids)
-        if not self.wk_team_id and not self.wk_extra_team_ids and not self.members:
-            raise UserError(
-                _(
-                    "Oops!!! you haven't configured any team or extra members for this project. So please do it otherwise you won't be able to assign any task of this project to your team members."))
         if vals.get('stage_group_id'):
             self.type_ids = [(6, 0, self.stage_group_id.stages_ids.ids)]
         if old_members != new_members:
@@ -144,10 +140,6 @@ class ProjectProject(models.Model):
 
     @api.model
     def create(self, vals):
-        if not vals.get("wk_team_id") and not vals.get("wk_extra_team_ids") and not vals.get("members"):
-            raise UserError(
-                _(
-                    "Oops!!! you haven't configured any team or extra members for this project. So please do it otherwise you won't be able to assign any task of this project to your team members."))
         res = super(ProjectProject, self).create(vals)
         if not res.type_ids:
             res.type_ids = [(6, 0, res.stage_group_id.stages_ids.ids)]
