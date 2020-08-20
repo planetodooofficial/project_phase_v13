@@ -113,7 +113,8 @@
             <field name="inherit_id" ref="project.edit_project"/>
             <field name="arch" type="xml">
                 <xpath expr="//header" position="inside">
-                    <button name="create_event" string="Add to Calendar" type="object" class="oe_highlight oe_read_only"/>
+                    <button name="create_event" string="Add to Calendar" type="object" class="oe_highlight oe_read_only"
+                    groups="project_phases_v13.group_manager"/>
                 </xpath>
             </field>
         </record>
