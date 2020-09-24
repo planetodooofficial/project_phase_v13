@@ -1,17 +1,10 @@
 id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
 user_project_dashboard,project.dashboard,model_project_dashboard,project.group_project_user,0,0,0,0
-
-manager_project_dashboard,project.dashboard,model_project_dashboard,project_phases_v13.group_manager,1,1,1,1
 user_announcement_panel,announcement.panel,model_announcement_panel,project.group_project_user,1,0,0,0
-manager_announcement_panel,announcement.panel,model_announcement_panel,project_phases_v13.group_manager,1,1,1,1
-
 all_milestone_project,milestone.project,model_milestone_project,project.group_project_user,1,0,0,0
-user_milestone_project,milestone.project,model_milestone_project,project_phases_v13.group_milestone,1,1,1,1
-manager_milestone_project,milestone.project,model_milestone_project,project_phases_v13.group_manager,1,1,1,1
-
 access_project_project_view,project.project,project.model_project_project,project_phases_v13.group_viewer,1,0,0,0
-access_project_task_view,project.task,project.model_project_task,project_phases_v13.group_viewer,1,0,0,0
-viewer_announcement_panel,announcement.panel,model_announcement_panel,project_phases_v13.group_viewer,1,0,0,0
+access_project_milestone_view,milestone.project,model_milestone_project,project_phases_v13.group_viewer,1,0,0,0
+
 
 
 
