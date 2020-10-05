@@ -14,6 +14,7 @@
         'data/delete_announcements.xml',
         'security/project_user_acess.xml',
         'security/ir.model.access.csv',
+        'security/new_menuitem.xml',
         'views/res_partner_inherit_views.xml',
         'views/project_dashboard.xml',
         'views/milestone_view.xml',

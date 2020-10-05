@@ -4,7 +4,8 @@ user_announcement_panel,announcement.panel,model_announcement_panel,project.grou
 all_milestone_project,milestone.project,model_milestone_project,project.group_project_user,1,0,0,0
 access_project_project_view,project.project,project.model_project_project,project_phases_v13.group_viewer,1,0,0,0
 access_project_milestone_view,milestone.project,model_milestone_project,project_phases_v13.group_viewer,1,0,0,0
-
+access_project_manager,project.project,project.model_project_project,project_phases_v13.group_manager,1,1,1,0
+access_project_task,project.task,project.model_project_task,project_phases_v13.group_manager,1,1,1,0
 
 
 
