@@ -52,10 +52,10 @@
                   action="hr_timesheet.act_hr_timesheet_line"
                   groups="project_phases_v13.group_manager,project_phases_v13.group_viewer"/>
 
-        <menuitem id="project_phases_menu_timesheet_menu_activity_all"
+        <menuitem id="project_phase_menu_timesheet_menu_activity_all"
                   name="All Timesheets"
                   parent="project_phases_v13.project_phases_menu_menu_hr_time_tracking"
                   action="hr_timesheet.timesheet_action_all"
-                  groups="project_phases_v13.group_manager,project_phases_v13.group_viewer"/>
+                  groups="project_phases_v13.group_manager"/>
     </data>
 </odoo>
