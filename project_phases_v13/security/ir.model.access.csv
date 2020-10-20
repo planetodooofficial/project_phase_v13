@@ -14,7 +14,7 @@ access_project_task_type,project.task.type,project.model_project_task_type,proje
 access_milestone_project,milestone.project,model_milestone_project,project_phases_v13.group_manager,1,1,1,0
 access_timesheet_view,access.timesheet.view,hr.model_hr_employee,project_phases_v13.group_viewer,1,0,0,0
 access_timesheet_manager,access.timesheet,hr.model_hr_employee,project_phases_v13.group_manager,1,1,1,0
-access_hr_timesheet_view,access.hr.timesheet.view,hr_timesheet.model_account_analytic_line,project_phases_v13.group_viewer,1,1,1`,0
+access_hr_timesheet_view,access.hr.timesheet.view,hr_timesheet.model_account_analytic_line,project_phases_v13.group_viewer,1,1,1,0
 access_hr_timesheet,access.hr.timesheet,hr_timesheet.model_account_analytic_line,project_phases_v13.group_manager,1,1,1,0
 
 
