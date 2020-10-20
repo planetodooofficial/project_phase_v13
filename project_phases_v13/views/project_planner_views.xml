@@ -1,11 +1,13 @@
 <odoo>
     <data>
+
         <record id="action_project_planner" model="ir.actions.act_window">
             <field name="name">Project Planning</field>
             <field name="res_model">calendar.event</field>
             <field name="type">ir.actions.act_window</field>
             <field name="view_mode">calendar</field>
         </record>
+
         <record id="project_calendar_event_form_inherit" model="ir.ui.view">
             <field name="name">calendar.event.form.project</field>
             <field name="model">calendar.event</field>
@@ -16,6 +18,7 @@
                 </xpath>
             </field>
         </record>
+
         <record id="calendar_project_inherited" model="ir.ui.view">
             <field name="name">project.calendar.inherited</field>
             <field name="model">calendar.event</field>
@@ -26,6 +29,11 @@
                 </xpath>
             </field>
         </record>
-        <menuitem id="project_planner_menu" name="Project Planner" parent="project.menu_main_pm" action="action_project_planner" sequence="12"/>
+
+        <menuitem id="project_planner_menu"
+                  name="Project Planner"
+                  parent="project.menu_main_pm"
+                  action="action_project_planner"
+                  sequence="12"/>
     </data>
 </odoo>

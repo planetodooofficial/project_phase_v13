@@ -1,7 +1,7 @@
 id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
-user_project_dashboard,project.dashboard,model_project_dashboard,project.group_project_user,0,0,0,0
-user_announcement_panel,announcement.panel,model_announcement_panel,project.group_project_user,1,0,0,0
+user_project_dashboard,project.dashboard,model_project_dashboard,project.group_project_user,1,1,1,1
 all_milestone_project,milestone.project,model_milestone_project,project.group_project_user,1,1,1,1
+user_announcement_panel,announcement.panel,model_announcement_panel,project.group_project_user,1,0,0,0
 access_project_project_view,project.project,project.model_project_project,project_phases_v13.group_viewer,1,0,0,0
 access_project_milestone_view,milestone.project,model_milestone_project,project_phases_v13.group_viewer,1,0,0,0
 access_project_task_view,project.task,project.model_project_task,project_phases_v13.group_viewer,1,0,0,0
@@ -16,5 +16,9 @@ access_timesheet_view,access.timesheet.view,hr.model_hr_employee,project_phases_
 access_timesheet_manager,access.timesheet,hr.model_hr_employee,project_phases_v13.group_manager,1,1,1,0
 access_hr_timesheet_view,access.hr.timesheet.view,hr_timesheet.model_account_analytic_line,project_phases_v13.group_viewer,1,1,1,0
 access_hr_timesheet,access.hr.timesheet,hr_timesheet.model_account_analytic_line,project_phases_v13.group_manager,1,1,1,0
+access_project_planning,access.project.planning,model_calendar_event,project_phases_v13.group_manager,1,1,1,0
+access_project_planning_view,access.project.planning.view,model_calendar_event,project_phases_v13.group_viewer,1,0,0,0
+access_milestone_project_view,milestone.project,model_milestone_project,project_phases_v13.group_viewer,1,0,0,0
+access_milestone_project,milestone.project,model_milestone_project,project_phases_v13.group_manager,1,1,1,0
 
 

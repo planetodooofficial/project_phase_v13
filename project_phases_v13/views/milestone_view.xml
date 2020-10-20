@@ -15,6 +15,7 @@
                 </tree>
             </field>
         </record>
+
         <record id="act_select_task" model="ir.actions.act_window">
             <field name="name">Tasks</field>
             <field name="res_model">project.task</field>
@@ -71,6 +72,7 @@
                 </form>
             </field>
         </record>
+
         <record id="milestone_view_search" model="ir.ui.view">
             <field name="name">milestone.project.search</field>
             <field name="model">milestone.project</field>
@@ -80,6 +82,7 @@
                 </search>
             </field>
         </record>
+
         <record id="milestone_action" model="ir.actions.act_window">
             <field name="name">Project Milestones</field>
             <field name="res_model">milestone.project</field>
@@ -98,7 +101,13 @@
             <field name="view_mode">tree,form</field>
             <field name="search_view_id" ref="milestone_view_search"/>
         </record>
-        <menuitem id="milestone_menu" name="Project Milestone" parent="project.menu_project_config" action="milestone_action" sequence="13"/>
+
+        <menuitem id="milestone_menu"
+                  name="Project Milestone"
+                  parent="project.menu_project_config"
+                  action="milestone_action"
+                  sequence="13"/>
+
         <record id="milestones_project_inherit" model="ir.ui.view">
             <field name="name">milestones.add.form.data</field>
             <field name="model">project.project</field>
@@ -112,5 +121,6 @@
                 </div>
             </field>
         </record>
+
     </data>
 </odoo>
