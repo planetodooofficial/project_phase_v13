@@ -33,5 +33,29 @@
                   parent="project_phases_v13.project_phases_menu_project_reports"
                   groups="project_phases_v13.group_manager"
                   sequence="100"/>
+
+        <menuitem id="project_phases_menu_timesheet_menu_root"
+                  name="Timesheets"
+                  sequence="55"
+                  groups="project_phases_v13.group_manager,project_phases_v13.group_viewer"
+                  web_icon="hr_timesheet,static/description/icon_timesheet.png"/>
+
+        <menuitem id="project_phases_menu_menu_hr_time_tracking"
+                  name="Timesheet"
+                  parent="project_phases_v13.project_phases_menu_timesheet_menu_root"
+                  groups="project_phases_v13.group_manager,project_phases_v13.group_viewer"
+                  sequence="5"/>
+
+        <menuitem id="project_phases_menu_project_timesheet_menu_activity_mine"
+                  name="My Timesheets"
+                  parent="project_phases_v13.project_phases_menu_menu_hr_time_tracking"
+                  action="hr_timesheet.act_hr_timesheet_line"
+                  groups="project_phases_v13.group_manager,project_phases_v13.group_viewer"/>
+
+        <menuitem id="project_phases_menu_timesheet_menu_activity_all"
+                  name="All Timesheets"
+                  parent="project_phases_v13.project_phases_menu_menu_hr_time_tracking"
+                  action="hr_timesheet.timesheet_action_all"
+                  groups="project_phases_v13.group_manager,project_phases_v13.group_viewer"/>
     </data>
 </odoo>
