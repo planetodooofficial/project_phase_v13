@@ -14,6 +14,10 @@ class ProjectInherit(models.Model):
     notification_date = fields.Date("Notification Date")
     currency_id = fields.Many2one('res.currency', string="Currency")
     invite_user = fields.Many2many("res.users", string="Invite user")
+    user_rights = fields.Selection([('Administration', 'Administration'),
+                                    ('Manager', 'Manager'),
+                                    ('User', 'User'),
+                                    ('Viewer', 'Viewer')], string='Access Rights')
     project_budget = fields.Selection([("fixed", "Fixed Budget"),
                                        ("weekly", "Weekly Budget"),
                                        ("custom", "Custom Budget")])
