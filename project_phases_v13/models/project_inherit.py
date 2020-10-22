@@ -14,10 +14,7 @@ class ProjectInherit(models.Model):
     notification_date = fields.Date("Notification Date")
     currency_id = fields.Many2one('res.currency', string="Currency")
     invite_user = fields.Many2many("res.users", string="Invite user")
-    user_rights = fields.Selection([('Administration', 'Administration'),
-                                    ('Manager', 'Manager'),
-                                    ('User', 'User'),
-                                    ('Viewer', 'Viewer')], string='Access Rights')
+    user_access_rights = fields.One2many('user.access.roles', 'project_ids', 'Assign Users')
     project_budget = fields.Selection([("fixed", "Fixed Budget"),
                                        ("weekly", "Weekly Budget"),
                                        ("custom", "Custom Budget")])
@@ -47,13 +44,39 @@ class ProjectInherit(models.Model):
 
     @api.model
     def create(self, vals):
-        # Prevent double project creation
+        # Prevent double project creation.
         self = self.with_context(mail_create_nosubscribe=True)
         project = super(ProjectInherit, self).create(vals)
         if not vals.get('subtask_project_id'):
             project.subtask_project_id = project.id
         if project.privacy_visibility == 'portal' and project.partner_id:
             project.message_subscribe(project.partner_id.ids)
+
+        # Assign groups to the user everytime the project is created.
+        # One user can be assigned only to one project at a time
+        group_admin = self.env['res.groups'].search([('name', '=', 'Administrator')])
+        for group in group_admin:
+            if group.full_name == 'Project / Administrator':
+                group_admin = group
+                break
+        group_manager = self.env['res.groups'].search([('name', '=', 'Manager')])
+        group_user = self.env['res.groups'].search([('name', '=', 'User')])
+        group_viewer = self.env['res.groups'].search([('name', '=', 'Viewer')])
+
+        for values in vals['user_access_rights']:
+            if values[2]['user_rights'] == 'Administrator':
+                users = self.env['res.users'].search([('id', '=', values[2]['user'])]).id
+                group_admin.write({'users': [(4, users)]})
+            elif values[2]['user_rights'] == 'Manager':
+                users = self.env['res.users'].search([('id', '=', values[2]['user'])]).id
+                group_manager.write({'users': [(4, users)]})
+            elif values[2]['user_rights'] == 'User':
+                users = self.env['res.users'].search([('id', '=', values[2]['user'])]).id
+                group_user.write({'users': [(4, users)]})
+            elif values[2]['user_rights'] == 'Viewer':
+                users = self.env['res.users'].search([('id', '=', values[2]['user'])]).id
+                group_viewer.write({'users': [(4, users)]})
+            values.pop()
         return project
 
     def _compute_total_cost(self):
@@ -219,3 +242,14 @@ class ProjectInherit(models.Model):
                 channel_obj1.sudo().message_post(body=message, message_type="comment", subtype="mail.mt_comment")
             self.channel_id = channel_obj1.id
         return super(ProjectInherit, self).open_tasks()
+
+
+class User_Access_Rights(models.TransientModel):
+    _name = 'user.access.roles'
+
+    project_ids = fields.Many2one('project.project', 'Project ID')
+    user = fields.Many2one('res.users', 'User')
+    user_rights = fields.Selection([('Administration', 'Administration'),
+                                    ('Manager', 'Manager'),
+                                    ('User', 'User'),
+                                    ('Viewer', 'Viewer')], string='Access Rights')
