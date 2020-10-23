@@ -1,5 +1,5 @@
 from odoo import models, api, _, fields
-from odoo.exceptions import UserError
+from odoo.exceptions import UserError, ValidationError
 
 
 class ProjectInherit(models.Model):
@@ -77,6 +77,14 @@ class ProjectInherit(models.Model):
                 users = self.env['res.users'].search([('id', '=', values[2]['user'])]).id
                 group_viewer.write({'users': [(4, users)]})
             values.pop()
+
+        already_assign_user = ''
+        for user in project.user_access_rights.user:
+            already_assign_user = project.search([('invite_user', '=', user.id)])
+
+        if already_assign_user:
+            raise ValidationError(_('User is already assigned for a Project. Please select different user.'))
+
         return project
 
     def _compute_total_cost(self):
