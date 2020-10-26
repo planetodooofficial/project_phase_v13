@@ -3,7 +3,7 @@
     <data>
         <menuitem name="Project"
                   id="project_phases_menu_main_pm"
-                  groups="project_phases_v13.group_manager,project_phases_v13.group_viewer"
+                  groups="project_phases_v13.group_manager,project_phases_v13.group_viewer,base.group_no_one,project.group_project_user"
                   web_icon="project,static/description/icon.png"
                   sequence="50"/>
 

@@ -59,30 +59,31 @@ class ProjectInherit(models.Model):
             if group.full_name == 'Project / Administrator':
                 group_admin = group
                 break
-        group_manager = self.env['res.groups'].search([('name', '=', 'Manager')])
+        group_manager = self.env['res.groups'].search([('name', '=', 'Organization Project Manager')])
         group_user = self.env['res.groups'].search([('name', '=', 'User')])
-        group_viewer = self.env['res.groups'].search([('name', '=', 'Viewer')])
+        group_viewer = self.env['res.groups'].search([('name', '=', 'Organization Project Viewer')])
 
         for values in vals['user_access_rights']:
             if values[2]['user_rights'] == 'Administrator':
                 users = self.env['res.users'].search([('id', '=', values[2]['user'])]).id
                 group_admin.write({'users': [(4, users)]})
-            elif values[2]['user_rights'] == 'Manager':
+            elif values[2]['user_rights'] == 'Organization Project Manager':
                 users = self.env['res.users'].search([('id', '=', values[2]['user'])]).id
                 group_manager.write({'users': [(4, users)]})
             elif values[2]['user_rights'] == 'User':
                 users = self.env['res.users'].search([('id', '=', values[2]['user'])]).id
                 group_user.write({'users': [(4, users)]})
-            elif values[2]['user_rights'] == 'Viewer':
+            elif values[2]['user_rights'] == 'Organization Project Viewer':
                 users = self.env['res.users'].search([('id', '=', values[2]['user'])]).id
                 group_viewer.write({'users': [(4, users)]})
             values.pop()
 
         already_assign_user = ''
         for user in project.user_access_rights.user:
-            already_assign_user = project.search([('invite_user', '=', user.id)])
+            proj = self.env['project.project']
+            already_assign_user = proj.search([('invite_user', '=', user.id)])
 
-        if already_assign_user:
+        if already_assign_user != project:
             raise ValidationError(_('User is already assigned for a Project. Please select different user.'))
 
         return project
@@ -258,6 +259,8 @@ class User_Access_Rights(models.TransientModel):
     project_ids = fields.Many2one('project.project', 'Project ID')
     user = fields.Many2one('res.users', 'User')
     user_rights = fields.Selection([('Administration', 'Administration'),
-                                    ('Manager', 'Manager'),
-                                    ('User', 'User'),
-                                    ('Viewer', 'Viewer')], string='Access Rights')
+                                    ('Organization Project Manager', 'Organization Project Manager'),
+                                    ('Organization Project Viewer', 'Organization Project Viewer'),
+                                    ('Project Manager', 'Project Manager'),
+                                    ('Project Viewer', 'Project Viewer'),
+                                    ('User', 'User')], string='Access Rights')
