@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+        <record id="tracker_project_inherit" model="ir.ui.view">
+            <field name="name">tracker.add.form.data</field>
+            <field name="model">project.project</field>
+            <field name="inherit_id" ref="project.edit_project"/>
+            <field name="arch" type="xml">
+                <div name="button_box" position="inside">
+                    <button class="oe_stat_button" name="%(time_tracker_project.timesheet_tracker_action)d" type="action" icon="fa-bullhorn">
+                        <newline/>
+                        <div class="o_stat_info">
+                            <span class="o_stat_text">Screenshots</span>
+                        </div>
+                    </button>
+                </div>
+                <!--               <xpath expr="//field[@name='user_id']" position="after">-->
+                <!--                    <field name="team_id" widget="many2many_tags"/>-->
+                <!--                </xpath>-->
+            </field>
+        </record>
+    </data>
+</odoo>

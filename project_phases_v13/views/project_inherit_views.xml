@@ -22,6 +22,7 @@
                             </div>
                         </group>
                         <group>
+                            <field name="user_id" string="Project Manager" style="width:200px"/>
                             <field name="invite_user" string="Invite User" style="width:200px" widget="many2many_tags"/>
                             <field name="user_access_rights" required="1">
                                 <tree string="Project Access Rights" widget="one2many_list" editable="True">

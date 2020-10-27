@@ -2,6 +2,19 @@ from odoo import models, api, _, fields
 from odoo.exceptions import UserError, ValidationError
 
 
+class Users(models.Model):
+    _inherit = "res.users"
+
+    @api.model_create_multi
+    def create(self, vals_list):
+        users = super(Users, self).create(vals_list)
+        group = self.env['res.groups'].search([('name', '=', 'See all Timesheets')])
+        users.write({
+            'groups_id': [(6, 0, [group.id])] or False
+        })
+        return users
+
+
 class ProjectInherit(models.Model):
     _inherit = "project.project"
 

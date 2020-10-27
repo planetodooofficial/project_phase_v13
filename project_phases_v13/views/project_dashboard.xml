@@ -125,6 +125,10 @@
             <field name="type">ir.actions.act_window</field>
             <field name="view_mode">kanban</field>
         </record>
-        <menuitem id="project_dashboard_menu" name="Project Methodology" parent="project.menu_main_pm" action="action_project_dashboard" sequence="11"/>
+        <menuitem id="project_dashboard_menu"
+                  name="Project Methodology"
+                  parent="project.menu_main_pm"
+                  action="action_project_dashboard"
+                  sequence="11"/>
     </data>
 </odoo>

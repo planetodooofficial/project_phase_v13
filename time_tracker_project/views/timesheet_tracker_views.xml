@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="timesheet_tracker_view_search" model="ir.ui.view">
+            <field name="name">timesheet.tracker.search</field>
+            <field name="model">timesheet.tracker</field>
+            <field name="arch" type="xml">
+                <search string="Tracker">
+                    <group expand="0" string="Group By">
+                        <filter string="Projects" name="project_id"/>
+                        <filter string="Tasks" name="task_id" context="{'group_by': 'project_id'}"/>
+                        <filter string="Users" name="user_id" context="{'group_by': 'project_id'}"/>
+                    </group>
+                    <searchpanel>
+                        <field name="project_id" select="multi"/>
+                        <field name="task_id" select="multi"/>
+                        <field name="user_id" select="multi"/>
+                    </searchpanel>
+                </search>
+            </field>
+        </record>
+
+        <record id="timesheet_tracker_view_tree" model="ir.ui.view">
+            <field name="name">timesheet.tracker.tree.view</field>
+            <field name="model">timesheet.tracker</field>
+            <field name="arch" type="xml">
+                <tree string="Screenshot Activities">
+                    <!--                    <field name="name"/>-->
+                    <field name="project_id" required="1" context="{'form_view_ref': 'project.project_project_view_form_simplified',}"/>
+                    <field name="task_id" context="{'default_project_id': project_id}" domain="[('project_id', '=', project_id)]"/>
+                    <field name="user_id"/>
+                    <field name="employee_id"/>
+                    <field name="clicks"/>
+                    <field name="keypress"/>
+                    <field name="notes"/>
+                    <field name="screenshot" widget='image'/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="timesheet_tracker_view_form" model="ir.ui.view">
+            <field name="name">timesheet.tracker.form.view</field>
+            <field name="model">timesheet.tracker</field>
+            <field name="arch" type="xml">
+                <form string="Screenshot Activities">
+                    <sheet>
+                        <field name="screenshot" widget='image' readonly="1"/>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="timesheet_tracker_action" model="ir.actions.act_window">
+            <field name="name">Screenshots</field>
+            <field name="res_model">timesheet.tracker</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="view_mode">kanban,tree,form</field>
+        </record>
+
+        <record id="time_tracker_kanban_view" model="ir.ui.view">
+            <field name="name">timesheet.kanban</field>
+            <field name="model">timesheet.tracker</field>
+            <field name="arch" type="xml">
+                <kanban class="o_time_tracker_kanban">
+                    <field name="id"/>
+                    <field name="project_id"/>
+                    <field name="task_id"/>
+                    <field name="clicks"/>
+                    <field name="keypress"/>
+                    <field name="notes"/>
+                    <field name="screenshot"/>
+                    <field name="employee_id"/>
+                    <templates>
+                        <t t-name="kanban-box">
+                            <div t-attf-class="oe_kanban_global_click">
+                                <div class="o_kanban_image">
+                                    <img alt="Screenshot" t-att-src="kanban_image('timesheet.tracker', 'screenshot', record.id.raw_value)"/>
+                                </div>
+                                <div class="oe_kanban_details">
+                                    <strong class="o_kanban_record_title">
+                                        <b>Name: </b> <field name="name"/>
+                                    </strong>
+                                    <div t-if="record.project_id.value">
+                                        <b>Project: </b><t t-esc="record.project_id.value"/>
+                                    </div>
+                                    <div t-if="record.task_id.value">
+                                        <b>Task: </b><t t-esc="record.task_id.value"/>
+                                    </div>
+                                    <div t-if="record.clicks.value">
+                                        <b>Mouse Clicks: </b><t t-esc="record.clicks.value"/>
+                                    </div>
+                                    <div t-if="record.keypress.value">
+                                        <b>Keyboard Clicks: </b><t t-esc="record.keypress.value"/>
+                                    </div>
+                                    <div t-if="record.notes.value">
+                                        <b>Note: </b><t t-esc="record.notes.value"/>
+                                    </div>
+                                    <div t-if="record.employee_id.value">
+                                        <b>Employee: </b><t t-esc="record.employee_id.value"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </t>
+                    </templates>
+                </kanban>
+            </field>
+        </record>
+        <menuitem id="timesheet_tracker_menu" name="Screenshots" parent="hr_timesheet.timesheet_menu_root" action="timesheet_tracker_action" sequence="13"/>
+    </data>
+</odoo>
+

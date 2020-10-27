@@ -1,0 +1,3 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_timesheet_tracker,access.timesheet.tracker,model_timesheet_tracker,base.group_user,1,1,1,1
+access_timesheet_tracker_tracker_user,access.timesheet.tracker.tracker.user,model_timesheet_tracker,time_tracker_project.org_user,1,1,1,0

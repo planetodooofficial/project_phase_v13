@@ -21,19 +21,6 @@
                   sequence="2"
                   groups="project_phases_v13.group_manager,project_phases_v13.group_viewer"/>
 
-        <menuitem id="project_phases_menu_project_reports"
-                  name="Reporting"
-                  groups="project_phases_v13.group_manager"
-                  parent="project_phases_v13.project_phases_menu_main_pm"
-                  sequence="3"/>
-
-        <menuitem id="project_phases_menu_project_report_task_analysis"
-                  name="Tasks Analysis"
-                  action="project.action_project_task_user_tree"
-                  parent="project_phases_v13.project_phases_menu_project_reports"
-                  groups="project_phases_v13.group_manager"
-                  sequence="100"/>
-
         <menuitem id="project_phases_menu_timesheet_menu_root"
                   name="Timesheets"
                   sequence="55"
@@ -58,18 +45,5 @@
                   action="hr_timesheet.timesheet_action_all"
                   groups="project_phases_v13.group_manager"/>
 
-        <menuitem id="project_phase_menu_project_planner_menu"
-                  name="Project Planner"
-                  parent="project_phases_v13.project_phases_menu_main_pm"
-                  action="project_phases_v13.action_project_planner"
-                  groups="project_phases_v13.group_manager,project_phases_v13.group_viewer"
-                  sequence="12"/>
-
-        <menuitem id="project_phase_menu_project_milestone_menu"
-                  name="Project Milestone"
-                  parent="project_phases_v13.project_phases_menu_main_pm"
-                  action="project_phases_v13.milestone_action"
-                  groups="project_phases_v13.group_manager,project_phases_v13.group_viewer"
-                  sequence="13"/>
     </data>
 </odoo>

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+        <record id="time_tracker_settings" model="ir.ui.view">
+            <field name="name">time.tracker.settings</field>
+            <field name="model">res.users</field>
+            <field name="inherit_id" ref="base.view_users_form"/>
+            <field name="arch" type="xml">
+                <notebook position="inside">
+                    <page string="Time Tracker Settings" groups="base.group_user">
+                        <group>
+                            <group string="Settings">
+                                <field name="screenshot_limit_per_hour"/>
+                                <field name="activity_level_tracking" widget="radio"/>
+                                <field name="app_url_tracking" widget="radio"/>
+                                <field name="weekly_time_limit"/>
+                                <field name="auto_pause_time" widget="radio"/>
+                                <field name="notification_for_screenshot" widget="radio"/>
+                            </group>
+                            <group string="Account Settings">
+                                <field name="allow_screenshots" widget="radio"/>
+                                <field name="allow__deletion_screenshots" widget="radio"/>
+                            </group>
+                        </group>
+                    </page>
+                </notebook>
+            </field>
+        </record>
+    </data>
+</odoo>

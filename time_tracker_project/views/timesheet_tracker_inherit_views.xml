@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="timesheet_tracker_view_tree_inherit" model="ir.ui.view">
+            <field name="name">timesheet.tracker.inherit.view</field>
+            <field name="model">account.analytic.line</field>
+            <field name="inherit_id" ref="hr_timesheet.hr_timesheet_line_tree"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='date']" position="after">
+                    <field name="screenshot_id" context="{'default_project_id': project_id}" domain="[('project_id', '=', project_id)]"/>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>
