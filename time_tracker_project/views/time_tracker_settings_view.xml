@@ -10,7 +10,7 @@
                     <page string="Time Tracker Settings" groups="base.group_user">
                         <group>
                             <group string="Settings">
-                                <field name="screenshot_limit_per_hour"/>
+                                <field name="screenshot_limit_per_minutes" widget="radio"/>
                                 <field name="activity_level_tracking" widget="radio"/>
                                 <field name="app_url_tracking" widget="radio"/>
                                 <field name="weekly_time_limit"/>

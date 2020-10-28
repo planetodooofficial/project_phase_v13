@@ -10,7 +10,15 @@ class Users(models.Model):
         users = super(Users, self).create(vals_list)
         group = self.env['res.groups'].search([('name', '=', 'See all Timesheets')])
         users.write({
-            'groups_id': [(6, 0, [group.id])] or False
+            'groups_id': [(6, 0, [group.id])] or False,
+            'screenshot_limit_per_hour': 10,
+            'activity_level_tracking': 'yes',
+            'app_url_tracking': 'yes',
+            'weekly_time_limit': 40,
+            'auto_pause_time': '5',
+            'notification_for_screenshot': 'yes',
+            'allow_screenshots': 'yes',
+            'allow__deletion_screenshots': 'no'
         })
         return users
 
